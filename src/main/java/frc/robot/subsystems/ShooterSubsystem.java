@@ -14,8 +14,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
     private TalonSRX shooterLeftTalon;
     private TalonSRX shooterRightTalon;
-    private Servo hoodServo1;
+    public Servo hoodServo1;
     private Servo hoodServo2;
+    private int x = 0;
 
     public ShooterSubsystem() {
         shooterLeftTalon = new TalonSRX(Constants.SHOOTER_1_TALON);
@@ -50,22 +51,33 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public double getAverageEncoder(){
-        return (getLeftEncoder() + getRightEncoder())/2;
+        return (getLeftEncoder() + getRightEncoder()) / 2;
     }
 
     public void testServo(){
-        hoodServo1.setAngle(45);
+        hoodServo1.set(0.5 * Math.sin(x / 50.0) + 0.5);
+        x++;
+        // hoodServo1.setAngle(100);
+        System.out.println("position: " + hoodServo1.getPosition() + " angle: " + hoodServo1.getAngle());
+    }
+
+    public void resetServo(){
+        hoodServo1.set(0.5);
+    }
+
+    public void stopServo(){
+        hoodServo1.setSpeed(0);
     }
 
     public void setHoodAngle(double angle){
         hoodServo1.setAngle(angle);
-        hoodServo2.setAngle(180-angle);
+        hoodServo2.setAngle(180 - angle);
     }
 
     public double getHoodAngle(){
-        return hoodServo1.getAngle();
+        return hoodServo1.getAngle() * Constants.SERVO_GEAR_RATIO; 
     }
-
+    // import the return from calcHoodAngle into setHoodAngle(or a new variable that does the same thing) and I think it should work.-caedmon
     public double calcHoodAngle(){
         return Math.toDegrees(Math.asin(Math.sqrt(Constants.SHOOTER_HEIGHT * 2 * Constants.GRAVITY) / Constants.SHOOT_1_SPEED));
     }

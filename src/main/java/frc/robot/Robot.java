@@ -43,9 +43,6 @@ public class Robot extends TimedRobot {
 
   public static RobotContainer robotContainer;
 
-  private UsbCamera jevoisView;
-
-  private JeVois jevois;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -62,7 +59,6 @@ public class Robot extends TimedRobot {
     
     robotContainer = new RobotContainer();
 
-    jevois = new JeVois();
   }
 
   /**
@@ -86,8 +82,6 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
     // System.out.println(WheelOfFortuneSubsystem.wheelColor);
-    jevois.parseStream();
-
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tx = table.getEntry("tx");
     NetworkTableEntry ty = table.getEntry("ty");

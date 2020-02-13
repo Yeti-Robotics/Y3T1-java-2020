@@ -31,6 +31,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
         rightFalcon2 = new TalonFX(Constants.RIGHT_FALCON_2);
         leftFalcon1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
         rightFalcon1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
+        
+        rightFalcon1.setInverted(true);
+        rightFalcon2.setInverted(true);
     }
 
     public void drive(double leftPower, double rightPower) {

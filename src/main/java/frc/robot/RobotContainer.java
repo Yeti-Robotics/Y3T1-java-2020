@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.drivetrain.TurnToTargetCommand;
 import frc.robot.commands.funnel.FunnelInCommand;
@@ -20,7 +21,6 @@ import frc.robot.commands.neck.MoveDownNeckCommand;
 import frc.robot.commands.shooting.ReverseShootCommand;
 import frc.robot.commands.shooting.SetHoodAngleCommand;
 import frc.robot.commands.shooting.ShootCommand;
-import frc.robot.commands.shooting.TestServoCommand;
 import frc.robot.commands.wheelOfFortune.PositionControlCommand;
 import frc.robot.commands.intake.RollInCommand;
 import frc.robot.commands.intake.RollOutCommand;
@@ -74,6 +74,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
     JoystickButton spin = new JoystickButton(leftJoy, 3);
     spin.whenPressed(new PositionControlCommand(wheelOfFortuneSubsystem));
 
@@ -99,7 +100,7 @@ public class RobotContainer {
     reverseShoot.whenPressed(new ReverseShootCommand(shooterSubsystem));
 
     JoystickButton testServo = new JoystickButton(secondaryJoy, 12);
-    testServo.whileHeld(new TestServoCommand(shooterSubsystem));
+    testServo.whenPressed(new SetHoodAngleCommand(shooterSubsystem, 30));
 
     JoystickButton shootingCommandGroup = new JoystickButton(secondaryJoy, 9);
     shootingCommandGroup.whenPressed(
