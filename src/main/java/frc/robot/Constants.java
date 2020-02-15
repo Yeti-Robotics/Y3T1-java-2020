@@ -32,7 +32,9 @@ public final class Constants {
 
     public static final int SHOOTER_SERVO_1 = 8;
     public static final int SHOOTER_SERVO_2 = 9;
-    public static final double SERVO_GEAR_RATIO = 25/96;
+    public static final double SERVO_GEAR_RATIO = 25.0 / 96;
+
+    public static final int[] INTAKE_PISTONS_SOLENOID = {1,2};
 
     public static final int WHEEL_OF_FORTUNE_TALON = 5;
     public static final int LEFT_JOYSTICK = 0;
