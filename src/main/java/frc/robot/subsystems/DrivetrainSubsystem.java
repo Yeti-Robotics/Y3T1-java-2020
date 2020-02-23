@@ -34,6 +34,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
         
         rightFalcon1.setInverted(true);
         rightFalcon2.setInverted(true);
+
+        leftFalcon2.follow(leftFalcon1);
+        rightFalcon2.follow(rightFalcon1);
     }
 
     public void drive(double leftPower, double rightPower) {

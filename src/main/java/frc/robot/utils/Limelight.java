@@ -21,7 +21,7 @@ public class Limelight {
      * Camera modes for Limelight.
      *
      * @author Dan Waxman
-     */
+     */ 
     public static enum CameraMode {
         eVision, eDriver
     }

@@ -14,20 +14,21 @@ package frc.robot;
  *
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
+ * 
  */
 public final class Constants {
     public static final int LEFT_FALCON_1 = 14;
     public static final int LEFT_FALCON_2 = 15;
     public static final int RIGHT_FALCON_1 = 1;
-    public static final int RIGHT_FALCON_2 = 0;
+    public static final int RIGHT_FALCON_2 = 7;
 
-    public static final int FUNNEL_VICTOR = 0;
-    public static final int INTAKE_VICTOR = 1;
+    public static final int FUNNEL_VICTOR = 5;
+    public static final int INTAKE_VICTOR = 0;
     
-    public static final int NECK_TALON = 4;
-    public static final int SHOOTER_1_TALON = 5;
-    public static final int SHOOTER_2_TALON = 6;
-    public static final int CLIMBER_TALON_1 = 7;
+    public static final int NECK_TALON = 3;
+    public static final int SHOOTER_1_FALCON = 4;
+    public static final int SHOOTER_2_FALCON = 10;
+    public static final int CLIMBER_TALON_1 = 2;
     public static final int CLIMBER_TALON_2 = 8;
 
     public static final int SHOOTER_SERVO_1 = 8;
@@ -37,22 +38,23 @@ public final class Constants {
     public static final int[] INTAKE_PISTONS_SOLENOID = {1,2};
 
     public static final int WHEEL_OF_FORTUNE_TALON = 5;
-    public static final int LEFT_JOYSTICK = 0;
     public static final int RIGHT_JOYSTICK = 1;
+    public static final int LEFT_JOYSTICK = 0;
     public static final int SECONDARY_JOYSTICK = 2;
 
+    public static final double SHOOT_1_SPEED = 0.5;
+    public static final double NECK_UP_SPEED = 0.5;
+    public static final double NECK_DOWN_SPEED = -0.5;
     public static final int JEVOIS_BAUD_RATE = 115200;
+    public static final double SERVO_RATIO = 0.72;
 
     public static final double ROLL_IN_SPEED = 0.5;
     public static final double ROLL_OUT_SPEED = -0.5;
-    public static final double NECK_UP_SPEED = 0.5;
-    public static final double NECK_DOWN_SPEED = -0.5;
-    public static final double SHOOT_1_SPEED = 0.5;
+    public static final double FUNNEL_OUT_SPEED = -0.5;
+    public static final double FUNNEL_IN_SPEED = 0.5;
     public static final double SHOOT_2_SPEED = 0.5;
     public static final double REVERSE_SHOOT_1_SPEED = -0.5;
     public static final double REVERSE_SHOOT_2_SPEED = -0.5;
-    public static final double FUNNEL_IN_SPEED = 0.5;
-    public static final double FUNNEL_OUT_SPEED = -0.5;
     public static final double CLIMBER_SPEED = 0.5;
 
     public static final int UPPER_BEAM_BREAK = 0;
