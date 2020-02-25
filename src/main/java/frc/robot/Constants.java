@@ -25,7 +25,8 @@ public final class Constants {
     public static final int FUNNEL_VICTOR = 5;
     public static final int INTAKE_VICTOR = 0;
     
-    public static final int NECK_TALON = 3;
+    public static final int NECK_BELT_TALON = 3;
+    public static final int NECK_BAR_TALON = 4;
     public static final int SHOOTER_1_FALCON = 4;
     public static final int SHOOTER_2_FALCON = 10;
     public static final int CLIMBER_TALON_1 = 2;

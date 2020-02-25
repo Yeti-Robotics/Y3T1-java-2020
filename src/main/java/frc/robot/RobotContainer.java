@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.climbing.ClimbDownCommand;
+import frc.robot.commands.climbing.ClimbUpCommand;
 import frc.robot.commands.drivetrain.TurnToTargetCommand;
 import frc.robot.commands.funnel.FunnelInCommand;
 import frc.robot.commands.neck.MoveUpNeckCommand;
@@ -44,12 +46,13 @@ public class RobotContainer {
   public final Joystick leftJoy;
   public final Joystick rightJoy;
   public final Joystick secondaryJoy;
-  private WheelOfFortuneSubsystem wheelOfFortuneSubsystem;
+//  private WheelOfFortuneSubsystem wheelOfFortuneSubsystem;
   private DrivetrainSubsystem drivetrainSubsystem;
   private IntakeSubsystem intakeSubsystem;
   private NeckSubsystem neckSubsystem;
   private ShooterSubsystem shooterSubsystem;
   private FunnelSubsystem funnelSubsystem;
+  private ClimberSubsystem climberSubsystem;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -60,7 +63,7 @@ public class RobotContainer {
     secondaryJoy = new Joystick(Constants.SECONDARY_JOYSTICK);
 
     drivetrainSubsystem = new DrivetrainSubsystem();
-    wheelOfFortuneSubsystem = new WheelOfFortuneSubsystem();
+//    wheelOfFortuneSubsystem = new WheelOfFortuneSubsystem();
     intakeSubsystem = new IntakeSubsystem();
     neckSubsystem = new NeckSubsystem();
     shooterSubsystem = new ShooterSubsystem();
@@ -80,9 +83,9 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    setJoystickButton(leftJoy, 3, new PositionControlCommand(wheelOfFortuneSubsystem)); //spin 
+//    setJoystickButton(leftJoy, 3, new PositionControlCommand(wheelOfFortuneSubsystem)); //spin
 
-    setJoystickButton(secondaryJoy, 4, new RotationControlCommand(wheelOfFortuneSubsystem));
+//    setJoystickButton(secondaryJoy, 4, new RotationControlCommand(wheelOfFortuneSubsystem));
 
     setJoystickButton(secondaryJoy, 1, new RollInCommand(intakeSubsystem));
 
@@ -101,6 +104,10 @@ public class RobotContainer {
     setJoystickButton(rightJoy, 1, new TestServoCommand(shooterSubsystem, 180));
 
     setJoystickButton(leftJoy, 1, new ReverseShootCommand(shooterSubsystem));
+
+    setJoystickButton(leftJoy, 2, new ClimbUpCommand(climberSubsystem));
+
+    setJoystickButton(leftJoy, 4, new ClimbDownCommand(climberSubsystem));
 
 //shoot
     setJoystickButton(leftJoy, 2, new SequentialCommandGroup(
@@ -122,6 +129,7 @@ public class RobotContainer {
              )
        ));
      setJoystickButton(leftJoy, 5, new TurnToTargetCommand(drivetrainSubsystem));
+
 
 
     // JoystickButton testServo = new JoystickButton(secondaryJoy, 12);
