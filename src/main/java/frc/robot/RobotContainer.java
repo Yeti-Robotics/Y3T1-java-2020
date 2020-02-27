@@ -14,26 +14,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.climbing.ClimbDownCommand;
-import frc.robot.commands.climbing.ClimbUpCommand;
 import frc.robot.commands.drivetrain.ToggleShiftingCommand;
-import frc.robot.commands.drivetrain.TurnToTargetCommand;
 import frc.robot.commands.funnel.FunnelInCommand;
 import frc.robot.commands.neck.MoveUpNeckCommand;
-import frc.robot.commands.neck.MoveDownNeckCommand;
-import frc.robot.commands.shooting.ReverseShootCommand;
 import frc.robot.commands.shooting.SetHoodAngleCommand;
 import frc.robot.commands.shooting.ShootCommand;
-import frc.robot.commands.shooting.TestServoCommand;
-import frc.robot.commands.wheelOfFortune.PositionControlCommand;
 import frc.robot.commands.intake.RollInCommand;
-import frc.robot.commands.intake.RollOutCommand;
-import frc.robot.commands.wheelOfFortune.RotationControlCommand;
 import frc.robot.subsystems.*;
-
-import java.util.function.BooleanSupplier;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -74,7 +62,7 @@ public class RobotContainer {
     funnelSubsystem = new FunnelSubsystem();
     shiftGearsSubsystem = new ShiftGearsSubsystem();
 
-     drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(-getLeftY(), -getRightY()), drivetrainSubsystem));
+     drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(-0, -0), drivetrainSubsystem));
      shooterSubsystem.setDefaultCommand(new RunCommand(() -> shooterSubsystem.setHoodAngle(getLeftThrottle()*180), shooterSubsystem));
     // Configure the button bindings
     configureButtonBindings();
@@ -87,11 +75,14 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    setJoystickButton(driverStationJoy, 11, new ToggleShiftingCommand(shiftGearsSubsystem));
+    setJoystickButtonWhenPressed(driverStationJoy, 11, new ToggleShiftingCommand(shiftGearsSubsystem));
+    setJoystickButtonWhileHeld(driverStationJoy, 1, new RollInCommand(intakeSubsystem));
+    setJoystickButtonWhileHeld(driverStationJoy, 2, new ShootCommand(shooterSubsystem));
 
-    setJoystickButton(driverStationJoy, 1, new RollInCommand(intakeSubsystem));
-    setJoystickButton(driverStationJoy, 2, new MoveUpNeckCommand(neckSubsystem));
-    setJoystickButton(driverStationJoy, 3, new ShootCommand(shooterSubsystem));
+
+
+
+//    setJoystickButtonWhenPressed(driverStationJoy, 3, new ShootCommand(shooterSubsystem));
 
 //    setJoystickButton(leftJoy, 3, new PositionControlCommand(wheelOfFortuneSubsystem)); //spin
 
@@ -110,7 +101,7 @@ public class RobotContainer {
 //    setJoystickButton(leftJoy, 4, new ClimbDownCommand(climberSubsystem));
 //
     //shooting command
-    setJoystickButton(driverStationJoy, 4, new SequentialCommandGroup(
+    setJoystickButtonWhenPressed(driverStationJoy, 4, new SequentialCommandGroup(
                       new SetHoodAngleCommand(shooterSubsystem, 45),
                       new ParallelCommandGroup(
                               new FunnelInCommand(funnelSubsystem),
@@ -165,7 +156,11 @@ public class RobotContainer {
   }
 
 
-  private void setJoystickButton(Joystick joystick, int button, CommandBase command){
+  private void setJoystickButtonWhenPressed(Joystick joystick, int button, CommandBase command){
     new JoystickButton(joystick, button).whenPressed(command);
+  }
+
+  private void setJoystickButtonWhileHeld(Joystick joystick, int button, CommandBase command){
+    new JoystickButton(joystick, button).whileHeld(command);
   }
 }

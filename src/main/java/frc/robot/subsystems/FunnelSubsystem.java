@@ -26,6 +26,5 @@ public class FunnelSubsystem extends SubsystemBase {
     public void funnelStop() {
         funnelVictor.set(ControlMode.PercentOutput, 0);
     }
-
 }
 

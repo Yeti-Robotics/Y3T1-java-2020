@@ -81,7 +81,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     public void periodic() {
         double leftY = Robot.robotContainer.getLeftY();
         double rightY = Robot.robotContainer.getRightY();
-        drive(-leftY, -rightY);
+        drive(-0, -0);
 
         // System.out.println("drivetrain periodic");
 
