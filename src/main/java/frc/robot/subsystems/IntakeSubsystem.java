@@ -34,7 +34,7 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void rollOut(){
-        intakeVictor.set(ControlMode.PercentOutput, -Constants.ROLL_IN_SPEED);
+        intakeVictor.set(ControlMode.PercentOutput, Constants.ROLL_OUT_SPEED);
     }
 
     public void stopRoll(){

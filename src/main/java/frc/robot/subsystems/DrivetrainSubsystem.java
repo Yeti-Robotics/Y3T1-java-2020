@@ -37,6 +37,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         // leftFalcon2.follow(leftFalcon1);
         // rightFalcon2.follow(rightFalcon1);
+
+
     }
 
     public void drive(double leftPower, double rightPower) {
@@ -77,8 +79,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
     @Override
     public void periodic() {
-        double leftY = Robot.robotContainer.leftJoy.getY();
-        double rightY = Robot.robotContainer.rightJoy.getY();
+        double leftY = Robot.robotContainer.getLeftY();
+        double rightY = Robot.robotContainer.getRightY();
         drive(-leftY, -rightY);
 
         // System.out.println("drivetrain periodic");

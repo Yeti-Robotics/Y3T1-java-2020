@@ -17,59 +17,78 @@ package frc.robot;
  * 
  */
 public final class Constants {
+    //drive constants
     public static final int LEFT_FALCON_1 = 14;
     public static final int LEFT_FALCON_2 = 15;
     public static final int RIGHT_FALCON_1 = 1;
     public static final int RIGHT_FALCON_2 = 7;
 
-    public static final int FUNNEL_VICTOR = 5;
+    public static final double kTurnP = .06;
+    public static final double kTurnI = 0;
+    public static final double kTurnD = .005;
+
+    //intake and hopper constants
     public static final int INTAKE_VICTOR = 0;
-    
-    public static final int NECK_BELT_TALON = 3;
-    public static final int NECK_BAR_TALON = 4;
-    public static final int SHOOTER_1_FALCON = 4;
-    public static final int SHOOTER_2_FALCON = 10;
-    public static final int CLIMBER_TALON_1 = 2;
-    public static final int CLIMBER_TALON_2 = 8;
-
-    public static final int SHOOTER_SERVO_1 = 8;
-    public static final int SHOOTER_SERVO_2 = 9;
-    public static final double SERVO_GEAR_RATIO = 25.0 / 96;
-
-    public static final int[] INTAKE_PISTONS_SOLENOID = {1,2};
-
-    public static final int WHEEL_OF_FORTUNE_TALON = 5;
-    public static final int RIGHT_JOYSTICK = 1;
-    public static final int LEFT_JOYSTICK = 0;
-    public static final int SECONDARY_JOYSTICK = 2;
-
-    public static final double SHOOT_1_SPEED = 0.5;
-    public static final double NECK_UP_SPEED = 0.5;
-    public static final double NECK_DOWN_SPEED = -0.5;
-    public static final int JEVOIS_BAUD_RATE = 115200;
-    public static final double SERVO_RATIO = 0.72;
+    public static final int FUNNEL_VICTOR = 5;
 
     public static final double ROLL_IN_SPEED = 0.5;
     public static final double ROLL_OUT_SPEED = -0.5;
-    public static final double FUNNEL_OUT_SPEED = -0.5;
+
     public static final double FUNNEL_IN_SPEED = 0.5;
-    public static final double SHOOT_2_SPEED = 0.5;
-    public static final double REVERSE_SHOOT_1_SPEED = -0.5;
-    public static final double REVERSE_SHOOT_2_SPEED = -0.5;
-    public static final double CLIMBER_SPEED = 0.5;
+    public static final double FUNNEL_OUT_SPEED = -0.5;
+
+    //neck constants
+    public static final int NECK_BELT_TALON = 3;
+    public static final int NECK_ROLLER_TALON = 4;
 
     public static final int UPPER_BEAM_BREAK = 0;
     public static final int LOWER_BEAM_BREAK = 1;
 
+    public static final double NECK_UP_SPEED = 0.5;
+    public static final double NECK_DOWN_SPEED = -0.5;
+
+    //shooter constants
+    public static final int SHOOTER_1_FALCON = 4;
+    public static final int SHOOTER_2_FALCON = 10;
+    public static final int SHOOTER_SERVO_1 = 8;
+    public static final int SHOOTER_SERVO_2 = 9;
+    public static final double SERVO_GEAR_RATIO = 25.0 / 96;
+    public static final double SERVO_RATIO = 0.72;
+
+    public static final double SHOOT_1_SPEED = 0.5;
+    public static final double SHOOT_2_SPEED = 0.5;
+    public static final double REVERSE_SHOOT_1_SPEED = -0.5;
+    public static final double REVERSE_SHOOT_2_SPEED = -0.5;
+
+    //climber constants
+    public static final int CLIMBER_TALON_1 = 2;
+    public static final int CLIMBER_TALON_2 = 8;
+
+    public static final double CLIMBER_SPEED = 0.5;
+
+    //wheel of fortune constants
+    public static final int WHEEL_OF_FORTUNE_TALON = 5;
+
+    //pnuematics
+    public static final int[] INTAKE_PISTONS_SOLENOID = {1,2};
+    public static final int[] SHIFTER_SOLENOID = {3,4};
+
+    //driver station constants
+    public static final int RIGHT_JOYSTICK = 1;
+    public static final int LEFT_JOYSTICK = 0;
+    public static final int SECONDARY_JOYSTICK = 2;
+    public static final int DRIVER_STATION_JOY = 0;
+
+    //distance calc constants
     public static final double KNOWN_DISTANCE = 161.3; //inches
     public static final int PIXEL_WIDTH_KNOWN = 65; //pixels
     public static final double KNOWN_TAPE_BOUND_WIDTH = 39.25; //inches
     public static final double FOCAL_LENGTH = ( KNOWN_DISTANCE * PIXEL_WIDTH_KNOWN) / KNOWN_TAPE_BOUND_WIDTH;
 
+    //trajectory constants
     public static final int SHOOTER_HEIGHT = 23; // inches
     public static final double GRAVITY = 386.09; // inches/ sec ^2
 
-    public static final double kTurnP = .06;
-    public static final double kTurnI = 0;
-    public static final double kTurnD = .005;
+    //ugly jevois constants
+    public static final int JEVOIS_BAUD_RATE = 115200;
 }

@@ -16,11 +16,11 @@ public class FunnelSubsystem extends SubsystemBase {
     }
 
     public void funnelIn() {
-        funnelVictor.set(ControlMode.PercentOutput,Constants.FUNNEL_IN_SPEED);
+        funnelVictor.set(ControlMode.PercentOutput, Constants.FUNNEL_IN_SPEED);
     }
 
     public void funnelOut() {
-        funnelVictor.set(ControlMode.PercentOutput,-Constants.FUNNEL_IN_SPEED);
+        funnelVictor.set(ControlMode.PercentOutput, Constants.FUNNEL_OUT_SPEED);
     }
 
     public void funnelStop() {
