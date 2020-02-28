@@ -36,8 +36,8 @@ public final class Constants {
     public static final int INTAKE_VICTOR = 0;
     public static final int FUNNEL_VICTOR = 5;
 
-    public static final double ROLL_IN_SPEED = 0.5;
-    public static final double ROLL_OUT_SPEED = -0.5;
+    public static final double ROLL_IN_SPEED = 0.75;
+    public static final double ROLL_OUT_SPEED = -0.75;
 
     public static final double FUNNEL_IN_SPEED = 0.5;
     public static final double FUNNEL_OUT_SPEED = -0.5;
@@ -53,15 +53,15 @@ public final class Constants {
     public static final double NECK_DOWN_SPEED = -0.5;
 
     //shooter constants
-    public static final int SHOOTER_1_TALON = 6;
-    public static final int SHOOTER_2_TALON = 5;
+    public static final int SHOOTER_LEFT_TALON = 6;
+    public static final int SHOOTER_RIGHT_TALON = 5; //right
     public static final int SHOOTER_SERVO_1 = 8;
     public static final int SHOOTER_SERVO_2 = 9;
     public static final double SERVO_GEAR_RATIO = 25.0 / 96;
     public static final double SERVO_RATIO = 0.72;
 
-    public static final double SHOOT_1_SPEED = 1.0;
-    public static final double SHOOT_2_SPEED = 1.0;
+    public static final double SHOOT_1_SPEED = 0.9;
+    public static final double SHOOT_2_SPEED = 0.9;
     public static final double REVERSE_SHOOT_1_SPEED = -0.5;
     public static final double REVERSE_SHOOT_2_SPEED = -0.5;
 

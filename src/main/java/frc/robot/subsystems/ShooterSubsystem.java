@@ -17,16 +17,18 @@ public class ShooterSubsystem extends SubsystemBase {
     private Servo hoodServo2;
 
     public ShooterSubsystem() {
-        shooterLeftTalon = new TalonSRX(Constants.SHOOTER_1_TALON);
-        shooterRightTalon = new TalonSRX(Constants.SHOOTER_2_TALON);
+        shooterLeftTalon = new TalonSRX(Constants.SHOOTER_LEFT_TALON);
+        shooterRightTalon = new TalonSRX(Constants.SHOOTER_RIGHT_TALON);
         hoodServo1 = new Servo(Constants.SHOOTER_SERVO_1);
         hoodServo2 = new Servo(Constants.SHOOTER_SERVO_2);
         shooterLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
         shooterRightTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+
+//        shooterLeftTalon.follow(shooterRightTalon);
     }
 
     public void shoot() {
-        shooterLeftTalon.set(ControlMode.PercentOutput, -Constants.SHOOT_1_SPEED);
+        shooterLeftTalon.set(ControlMode.PercentOutput, Constants.SHOOT_1_SPEED);
         shooterRightTalon.set(ControlMode.PercentOutput, Constants.SHOOT_2_SPEED);
     }
 

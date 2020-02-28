@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -22,6 +23,7 @@ import frc.robot.commands.neck.MoveUpNeckCommand;
 import frc.robot.commands.shooting.SetHoodAngleCommand;
 import frc.robot.commands.shooting.SpinFlywheelsCommand;
 import frc.robot.commands.intake.RollInCommand;
+import frc.robot.commands.shooting.StopSpinningCommand;
 import frc.robot.subsystems.*;
 
 /**
@@ -110,6 +112,15 @@ public class RobotContainer {
                               new SpinFlywheelsCommand(shooterSubsystem)
                       )
                 ).withInterrupt(() -> !neckSubsystem.getUpperBeamBreak()));
+
+    setJoystickButtonWhileHeld(driverStationJoy, 6, new ParallelCommandGroup(
+            new SpinFlywheelsCommand(shooterSubsystem),
+            new MoveUpNeckCommand(neckSubsystem)
+    ));
+
+    setJoystickButtonWhenPressed(driverStationJoy, 5, new ParallelCommandGroup(
+            new StopSpinningCommand(shooterSubsystem)
+    ));
 
 //// //align and shoot
 //     setJoystickButton(leftJoy, 4, new SequentialCommandGroup(
