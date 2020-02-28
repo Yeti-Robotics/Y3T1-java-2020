@@ -3,49 +3,49 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-    private TalonFX shooterLeftFalcon;
-    private TalonFX shooterRightFalcon;
+    private TalonSRX shooterLeftTalon;
+    private TalonSRX shooterRightTalon;
     public Servo hoodServo1;
     private Servo hoodServo2;
 
     public ShooterSubsystem() {
-        shooterLeftFalcon = new TalonFX(Constants.SHOOTER_1_FALCON);
-        shooterRightFalcon = new TalonFX(Constants.SHOOTER_2_FALCON);
+        shooterLeftTalon = new TalonSRX(Constants.SHOOTER_1_TALON);
+        shooterRightTalon = new TalonSRX(Constants.SHOOTER_2_TALON);
         hoodServo1 = new Servo(Constants.SHOOTER_SERVO_1);
         hoodServo2 = new Servo(Constants.SHOOTER_SERVO_2);
-        shooterLeftFalcon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-        shooterRightFalcon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+        shooterLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+        shooterRightTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     }
 
     public void shoot() {
-        shooterLeftFalcon.set(ControlMode.PercentOutput, -Constants.SHOOT_1_SPEED);
-        shooterRightFalcon.set(ControlMode.PercentOutput, Constants.SHOOT_2_SPEED);
+        shooterLeftTalon.set(ControlMode.PercentOutput, -Constants.SHOOT_1_SPEED);
+        shooterRightTalon.set(ControlMode.PercentOutput, Constants.SHOOT_2_SPEED);
     }
 
     public void reverseShoot() {
-        shooterLeftFalcon.set(ControlMode.PercentOutput, -Constants.REVERSE_SHOOT_1_SPEED);
-        shooterRightFalcon.set(ControlMode.PercentOutput, Constants.REVERSE_SHOOT_2_SPEED);
+        shooterLeftTalon.set(ControlMode.PercentOutput, -Constants.REVERSE_SHOOT_1_SPEED);
+        shooterRightTalon.set(ControlMode.PercentOutput, Constants.REVERSE_SHOOT_2_SPEED);
     }
 
     public void stopShoot() {
-        shooterLeftFalcon.set(ControlMode.PercentOutput, 0);
-        shooterRightFalcon.set(ControlMode.PercentOutput, 0);
+        shooterLeftTalon.set(ControlMode.PercentOutput, 0);
+        shooterRightTalon.set(ControlMode.PercentOutput, 0);
     }
 
     public double getLeftEncoder() {
-        return shooterLeftFalcon.getSelectedSensorVelocity();
+        return shooterLeftTalon.getSelectedSensorVelocity();
     }
 
     public double getRightEncoder() {
-        return shooterRightFalcon.getSelectedSensorVelocity();
+        return shooterRightTalon.getSelectedSensorVelocity();
     }
 
     public double getAverageEncoder() {
@@ -85,7 +85,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public double getSpeed() {
-        return shooterLeftFalcon.getMotorOutputPercent();
+        return shooterLeftTalon.getMotorOutputPercent();
     }
 
 }

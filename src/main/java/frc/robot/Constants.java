@@ -53,8 +53,8 @@ public final class Constants {
     public static final double NECK_DOWN_SPEED = -0.5;
 
     //shooter constants
-    public static final int SHOOTER_1_FALCON = 6;
-    public static final int SHOOTER_2_FALCON = 5;
+    public static final int SHOOTER_1_TALON = 6;
+    public static final int SHOOTER_2_TALON = 5;
     public static final int SHOOTER_SERVO_1 = 8;
     public static final int SHOOTER_SERVO_2 = 9;
     public static final double SERVO_GEAR_RATIO = 25.0 / 96;
