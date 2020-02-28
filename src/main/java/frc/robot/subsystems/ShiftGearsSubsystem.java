@@ -7,24 +7,29 @@ import frc.robot.Constants;
 
 public class ShiftGearsSubsystem extends SubsystemBase {
     private DoubleSolenoid shifter;
+    public enum ShiftStatus{
+        HIGH, LOW
+    }
+    public static ShiftStatus shiftStatus = ShiftStatus.LOW;
 
     public ShiftGearsSubsystem() {
-
         shifter = new DoubleSolenoid(Constants.SHIFTER_SOLENOID[0], Constants.SHIFTER_SOLENOID[1]);
-
     }
+
     public void shiftUp() {
         shifter.set(DoubleSolenoid.Value.kForward);
+        shiftStatus = ShiftStatus.HIGH;
     }
 
     //Shifts the drive train into low gear
     public void shiftDown() {
         shifter.set(DoubleSolenoid.Value.kReverse);
+        shiftStatus = ShiftStatus.LOW;
     }
 
     //Finds out what position the shifter is currently in
-    public DoubleSolenoid.Value getShifterPosition() {
-        return shifter.get();
+    public static ShiftStatus getShifterPosition() {
+        return shiftStatus;
     }
 
 }

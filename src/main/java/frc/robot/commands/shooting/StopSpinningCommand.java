@@ -4,11 +4,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
 
 
-public class ShootCommand extends CommandBase {
-
+public class StopSpinningCommand extends CommandBase {
     private final ShooterSubsystem shooterSubsystem;
 
-    public ShootCommand(ShooterSubsystem shooterSubsystem) {
+    public StopSpinningCommand(ShooterSubsystem shooterSubsystem) {
         this.shooterSubsystem = shooterSubsystem;
         addRequirements(shooterSubsystem);
     }
@@ -20,17 +19,17 @@ public class ShootCommand extends CommandBase {
 
     @Override
     public void execute() {
-        shooterSubsystem.shoot();
+        shooterSubsystem.stopShoot();
     }
 
     @Override
     public boolean isFinished() {
         // TODO: Make this return true when this Command no longer needs to run execute()
-        return false;
+        return true;
     }
 
     @Override
     public void end(boolean interrupted) {
-        shooterSubsystem.stopShoot();
+
     }
 }

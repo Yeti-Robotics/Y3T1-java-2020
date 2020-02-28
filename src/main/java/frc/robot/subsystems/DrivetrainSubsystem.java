@@ -42,7 +42,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public void drive(double leftPower, double rightPower) {
-
        leftFalcon1.set(ControlMode.PercentOutput, leftPower);
        leftFalcon2.set(ControlMode.PercentOutput, leftPower);
        rightFalcon1.set(ControlMode.PercentOutput, rightPower);
@@ -50,7 +49,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public void stopDrive() {
-
         leftFalcon1.set(ControlMode.PercentOutput, 0);
         leftFalcon2.set(ControlMode.PercentOutput, 0);
         rightFalcon1.set(ControlMode.PercentOutput, 0);
@@ -58,14 +56,15 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public double getLeftEncoder() {
-        return leftFalcon1.getSelectedSensorPosition();
+        return (leftFalcon1.getSelectedSensorPosition() * Constants.DISTANCE_PER_PULSE) / (ShiftGearsSubsystem.getShifterPosition() == ShiftGearsSubsystem.ShiftStatus.HIGH ? Constants.HIGH_GEAR_RATIO : Constants.LOW_GEAR_RATIO);
     }
 
     public double getRightEncoder() {
-        return rightFalcon1.getSelectedSensorPosition();
+        return (rightFalcon1.getSelectedSensorPosition() * Constants.DISTANCE_PER_PULSE) / (ShiftGearsSubsystem.getShifterPosition() == ShiftGearsSubsystem.ShiftStatus.HIGH ? Constants.HIGH_GEAR_RATIO : Constants.LOW_GEAR_RATIO);
     }
+
     public double getAverageEncoder() {
-        return (getLeftEncoder() + getRightEncoder() ) / 2;
+        return (getLeftEncoder() + getRightEncoder()) / 2;
     }
 
     public void resetEncoder() {
@@ -81,7 +80,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
     public void periodic() {
         double leftY = Robot.robotContainer.getLeftY();
         double rightY = Robot.robotContainer.getRightY();
-        drive(-0, -0);
+        drive(-0, - 0);
 
         // System.out.println("drivetrain periodic");
 

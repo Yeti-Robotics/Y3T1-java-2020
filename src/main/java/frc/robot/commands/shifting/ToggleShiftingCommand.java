@@ -1,4 +1,4 @@
-package frc.robot.commands.drivetrain;
+package frc.robot.commands.shifting;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -21,7 +21,7 @@ public class ToggleShiftingCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if (shiftGearsSubsystem.getShifterPosition() == DoubleSolenoid.Value.kForward) {
+        if (ShiftGearsSubsystem.getShifterPosition() == ShiftGearsSubsystem.ShiftStatus.HIGH) {
             shiftGearsSubsystem.shiftDown();
         } else {
             shiftGearsSubsystem.shiftUp();
@@ -30,7 +30,6 @@ public class ToggleShiftingCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        // TODO: Make this return true when this Command no longer needs to run execute()
         return true;
     }
 

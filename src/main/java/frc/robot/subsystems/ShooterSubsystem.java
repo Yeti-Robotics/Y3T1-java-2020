@@ -84,4 +84,8 @@ public class ShooterSubsystem extends SubsystemBase {
         return Math.toDegrees(Math.asin(Math.sqrt(Constants.SHOOTER_HEIGHT * 2 * Constants.GRAVITY) / Constants.SHOOT_1_SPEED));
     }
 
+    public double getSpeed() {
+        return shooterLeftFalcon.getMotorOutputPercent();
+    }
+
 }

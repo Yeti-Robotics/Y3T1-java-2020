@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.autoRoutines.ShootAutoCommandGroup;
 import frc.robot.commands.shooting.SetCalculatedHoodAngleCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.WheelOfFortuneSubsystem;
@@ -45,6 +46,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   public static RobotContainer robotContainer;
+  private ShootAutoCommandGroup shootAutoCommandGroup;
 
 
   /**
@@ -61,6 +63,7 @@ public class Robot extends TimedRobot {
 
     
     robotContainer = new RobotContainer();
+//    shootAutoCommandGroup = new ShootAutoCommandGroup(robotContainer.shooterS);
 
   }
 
@@ -126,7 +129,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-
+m_autonomousCommand =  shootAutoCommandGroup;
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

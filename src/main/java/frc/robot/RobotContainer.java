@@ -15,11 +15,12 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.drivetrain.ToggleShiftingCommand;
+import frc.robot.commands.drivetrain.DriveForDistanceCommand;
+import frc.robot.commands.shifting.ToggleShiftingCommand;
 import frc.robot.commands.funnel.FunnelInCommand;
 import frc.robot.commands.neck.MoveUpNeckCommand;
 import frc.robot.commands.shooting.SetHoodAngleCommand;
-import frc.robot.commands.shooting.ShootCommand;
+import frc.robot.commands.shooting.SpinFlywheelsCommand;
 import frc.robot.commands.intake.RollInCommand;
 import frc.robot.subsystems.*;
 
@@ -77,9 +78,9 @@ public class RobotContainer {
   private void configureButtonBindings() {
     setJoystickButtonWhenPressed(driverStationJoy, 11, new ToggleShiftingCommand(shiftGearsSubsystem));
     setJoystickButtonWhileHeld(driverStationJoy, 1, new RollInCommand(intakeSubsystem));
-    setJoystickButtonWhileHeld(driverStationJoy, 2, new ShootCommand(shooterSubsystem));
+    setJoystickButtonWhileHeld(driverStationJoy, 2, new SpinFlywheelsCommand(shooterSubsystem));
 
-
+    setJoystickButtonWhenPressed(driverStationJoy, 4, new DriveForDistanceCommand(drivetrainSubsystem, 10, .5, .5));
 
 
 //    setJoystickButtonWhenPressed(driverStationJoy, 3, new ShootCommand(shooterSubsystem));
@@ -106,7 +107,7 @@ public class RobotContainer {
                       new ParallelCommandGroup(
                               new FunnelInCommand(funnelSubsystem),
                               new MoveUpNeckCommand(neckSubsystem),
-                              new ShootCommand(shooterSubsystem)
+                              new SpinFlywheelsCommand(shooterSubsystem)
                       )
                 ).withInterrupt(() -> !neckSubsystem.getUpperBeamBreak()));
 
