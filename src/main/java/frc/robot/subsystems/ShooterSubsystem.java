@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.utils.Limelight;
 
 public class ShooterSubsystem extends SubsystemBase {
 
@@ -15,6 +16,7 @@ public class ShooterSubsystem extends SubsystemBase {
     private TalonSRX shooterRightTalon;
     public Servo hoodServo1;
     private Servo hoodServo2;
+    private double distance;
 
     public ShooterSubsystem() {
         shooterLeftTalon = new TalonSRX(Constants.SHOOTER_LEFT_TALON);
@@ -83,11 +85,15 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public double calcHoodAngle() {
-        return Math.toDegrees(Math.asin(Math.sqrt(Constants.SHOOTER_HEIGHT * 2 * Constants.GRAVITY) / Constants.SHOOT_1_SPEED));
+        return Math.toDegrees(Math.asin( -Constants.GRAVITY * distance) / Constants.SHOOT_1_SPEED);
     }
 
     public double getSpeed() {
         return shooterLeftTalon.getMotorOutputPercent();
     }
 
+    @Override
+    public void periodic() {
+        distance = Limelight.getHorDistance();
+    }
 }

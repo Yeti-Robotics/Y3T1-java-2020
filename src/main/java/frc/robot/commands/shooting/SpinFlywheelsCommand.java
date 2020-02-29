@@ -9,7 +9,8 @@ public class SpinFlywheelsCommand extends CommandBase {
 
     private final ShooterSubsystem shooterSubsystem;
 
-    public SpinFlywheelsCommand(ShooterSubsystem shooterSubsystem) {
+    public
+    SpinFlywheelsCommand(ShooterSubsystem shooterSubsystem) {
         this.shooterSubsystem = shooterSubsystem;
         addRequirements(shooterSubsystem);
     }

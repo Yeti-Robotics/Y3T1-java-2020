@@ -66,10 +66,10 @@ public final class Constants {
     public static final double REVERSE_SHOOT_2_SPEED = -0.5;
 
     //climber constants
-    public static final int CLIMBER_TALON_1 = 2;
-    public static final int CLIMBER_TALON_2 = 8;
+    public static final int CLIMBER_TALON_1 = 10; //left
+    public static final int CLIMBER_TALON_2 = 8; //right
 
-    public static final double CLIMBER_SPEED = 0.5;
+    public static final double CLIMBER_SPEED = 0.2;
 
     //wheel of fortune constants
     public static final int WHEEL_OF_FORTUNE_TALON = 5;

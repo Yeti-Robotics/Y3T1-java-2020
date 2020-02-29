@@ -16,6 +16,9 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.autoRoutines.AdjustHoodAndShootAutoCommandGroup;
+import frc.robot.commands.climbing.ClimbDownCommand;
+import frc.robot.commands.climbing.ClimbUpCommand;
 import frc.robot.commands.drivetrain.DriveForDistanceCommand;
 import frc.robot.commands.shifting.ToggleShiftingCommand;
 import frc.robot.commands.funnel.FunnelInCommand;
@@ -82,30 +85,14 @@ public class RobotContainer {
     setJoystickButtonWhileHeld(driverStationJoy, 1, new RollInCommand(intakeSubsystem));
     setJoystickButtonWhileHeld(driverStationJoy, 2, new SpinFlywheelsCommand(shooterSubsystem));
 
-    setJoystickButtonWhenPressed(driverStationJoy, 4, new DriveForDistanceCommand(drivetrainSubsystem, 10, .5, .5));
+    setJoystickButtonWhenPressed(driverStationJoy, 3, new DriveForDistanceCommand(drivetrainSubsystem, 10, .5, .5));
 
 
 //    setJoystickButtonWhenPressed(driverStationJoy, 3, new ShootCommand(shooterSubsystem));
 
-//    setJoystickButton(leftJoy, 3, new PositionControlCommand(wheelOfFortuneSubsystem)); //spin
-
-//    setJoystickButton(secondaryJoy, 4, new RotationControlCommand(wheelOfFortuneSubsystem));
-
-//    setJoystickButton(secondaryJoy, 1, new RollInCommand(intakeSubsystem));
-//    setJoystickButton(secondaryJoy, 2, new RollOutCommand(intakeSubsystem));
-//    setJoystickButton(secondaryJoy, 3, new MoveUpNeckCommand(neckSubsystem));
-//    setJoystickButton(secondaryJoy, 10, new MoveDownNeckCommand(neckSubsystem));
-//    setJoystickButton(secondaryJoy, 7, new ShootCommand(shooterSubsystem));
-//    setJoystickButton(secondaryJoy,8, new ReverseShootCommand(shooterSubsystem));
-//    setJoystickButton(rightJoy, 2, new TestServoCommand(shooterSubsystem, 0));
-//    setJoystickButton(rightJoy, 1, new TestServoCommand(shooterSubsystem, 180));
-//    setJoystickButton(leftJoy, 1, new ReverseShootCommand(shooterSubsystem));
-//    setJoystickButton(leftJoy, 2, new ClimbUpCommand(climberSubsystem));
-//    setJoystickButton(leftJoy, 4, new ClimbDownCommand(climberSubsystem));
-//
     //shooting command
     setJoystickButtonWhenPressed(driverStationJoy, 4, new SequentialCommandGroup(
-                      new SetHoodAngleCommand(shooterSubsystem, 45),
+                      new SetHoodAngleCommand(shooterSubsystem),
                       new ParallelCommandGroup(
                               new FunnelInCommand(funnelSubsystem),
                               new MoveUpNeckCommand(neckSubsystem),
@@ -122,6 +109,10 @@ public class RobotContainer {
             new StopSpinningCommand(shooterSubsystem)
     ));
 
+    setJoystickButtonWhenPressed(driverStationJoy, 8, new AdjustHoodAndShootAutoCommandGroup(shooterSubsystem, funnelSubsystem, neckSubsystem));
+
+    setJoystickButtonWhenPressed(driverStationJoy, 7, new ClimbUpCommand(climberSubsystem));
+    setJoystickButtonWhenPressed(driverStationJoy, 9, new ClimbDownCommand(climberSubsystem));
 //// //align and shoot
 //     setJoystickButton(leftJoy, 4, new SequentialCommandGroup(
 //             new TurnToTargetCommand(drivetrainSubsystem),
@@ -132,6 +123,9 @@ public class RobotContainer {
 //             )
 //       ));
 //     setJoystickButton(leftJoy, 5, new TurnToTargetCommand(drivetrainSubsystem));
+
+    //toggle climb power. (when button pressed, you can use joystick to toggle power.)
+    setJoystickButtonWhileHeld(driverStationJoy, 12, new RunCommand(() -> climberSubsystem.toggleClimbUp(getRightY())));
 
 
   }

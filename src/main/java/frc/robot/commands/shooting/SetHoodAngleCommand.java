@@ -8,10 +8,9 @@ public class SetHoodAngleCommand extends CommandBase {
     private final ShooterSubsystem shooterSubsystem;
     private double hoodAngle;
 
-    public SetHoodAngleCommand(ShooterSubsystem shooterSubsystem, double hoodAngle) {
+    public SetHoodAngleCommand(ShooterSubsystem shooterSubsystem) {
         this.shooterSubsystem = shooterSubsystem;
         addRequirements(shooterSubsystem);
-        this.hoodAngle = hoodAngle;
     }
 
     @Override

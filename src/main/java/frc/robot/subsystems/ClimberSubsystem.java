@@ -14,11 +14,18 @@ public class ClimberSubsystem extends SubsystemBase {
     public ClimberSubsystem() {
         climberTalon1 = new TalonSRX(Constants.CLIMBER_TALON_1);
         climberTalon2 = new TalonSRX(Constants.CLIMBER_TALON_2);
+
+//        climberTalon2.follow(climberTalon1);
     }
 
     public void climbUp(){
         climberTalon1.set(ControlMode.PercentOutput, Constants.CLIMBER_SPEED);
         climberTalon2.set(ControlMode.PercentOutput, Constants.CLIMBER_SPEED);
+    }
+
+    public void toggleClimbUp(double power){
+        climberTalon1.set(ControlMode.PercentOutput, power);
+        climberTalon2.set(ControlMode.PercentOutput, power);
     }
 
     public void climbDown(){
