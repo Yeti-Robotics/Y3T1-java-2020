@@ -17,14 +17,20 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autoRoutines.AdjustHoodAndShootAutoCommandGroup;
+import frc.robot.autoRoutines.ShootAutoCommandGroup;
 import frc.robot.commands.climbing.ClimbDownCommand;
 import frc.robot.commands.climbing.ClimbUpCommand;
 import frc.robot.commands.drivetrain.DriveForDistanceCommand;
+import frc.robot.commands.funnel.FunnelOutCommand;
+import frc.robot.commands.intake.RollOutCommand;
+import frc.robot.commands.neck.MoveDownNeckCommand;
 import frc.robot.commands.shifting.ToggleShiftingCommand;
 import frc.robot.commands.funnel.FunnelInCommand;
 import frc.robot.commands.neck.MoveUpNeckCommand;
 import frc.robot.commands.shooting.SetHoodAngleCommand;
 import frc.robot.commands.shooting.SpinFlywheelsCommand;
+import frc.robot.commands.intake.ExtendIntakeCommand;
+import frc.robot.commands.intake.RetractIntakeCommand;
 import frc.robot.commands.intake.RollInCommand;
 import frc.robot.commands.shooting.StopSpinningCommand;
 import frc.robot.subsystems.*;
@@ -67,6 +73,7 @@ public class RobotContainer {
     shooterSubsystem = new ShooterSubsystem();
     funnelSubsystem = new FunnelSubsystem();
     shiftGearsSubsystem = new ShiftGearsSubsystem();
+    climberSubsystem = new ClimberSubsystem();
 
      drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(-0, -0), drivetrainSubsystem));
      shooterSubsystem.setDefaultCommand(new RunCommand(() -> shooterSubsystem.setHoodAngle(getLeftThrottle()*180), shooterSubsystem));
@@ -81,38 +88,69 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    setJoystickButtonWhenPressed(driverStationJoy, 11, new ToggleShiftingCommand(shiftGearsSubsystem));
-    setJoystickButtonWhileHeld(driverStationJoy, 1, new RollInCommand(intakeSubsystem));
-    setJoystickButtonWhileHeld(driverStationJoy, 2, new SpinFlywheelsCommand(shooterSubsystem));
 
-    setJoystickButtonWhenPressed(driverStationJoy, 3, new DriveForDistanceCommand(drivetrainSubsystem, 10, .5, .5));
+    setJoystickButtonWhileHeld(driverStationJoy, 1, new MoveUpNeckCommand(neckSubsystem));
 
+    setJoystickButtonWhileHeld(driverStationJoy, 2, new FunnelInCommand(funnelSubsystem));
 
-//    setJoystickButtonWhenPressed(driverStationJoy, 3, new ShootCommand(shooterSubsystem));
+    setJoystickButtonWhileHeld(driverStationJoy, 3, new FunnelOutCommand(funnelSubsystem));
 
-    //shooting command
-    setJoystickButtonWhenPressed(driverStationJoy, 4, new SequentialCommandGroup(
-                      new SetHoodAngleCommand(shooterSubsystem),
-                      new ParallelCommandGroup(
-                              new FunnelInCommand(funnelSubsystem),
-                              new MoveUpNeckCommand(neckSubsystem),
-                              new SpinFlywheelsCommand(shooterSubsystem)
-                      )
-                ).withInterrupt(() -> !neckSubsystem.getUpperBeamBreak()));
-
-    setJoystickButtonWhileHeld(driverStationJoy, 6, new ParallelCommandGroup(
-            new SpinFlywheelsCommand(shooterSubsystem),
-            new MoveUpNeckCommand(neckSubsystem)
-    ));
-
+    setJoystickButtonWhileHeld(driverStationJoy, 4, new ParallelCommandGroup(new RollInCommand(intakeSubsystem), new MoveUpNeckCommand(neckSubsystem), new FunnelOutCommand(funnelSubsystem)));
+    //Stops the flywheel
     setJoystickButtonWhenPressed(driverStationJoy, 5, new ParallelCommandGroup(
             new StopSpinningCommand(shooterSubsystem)
     ));
+    //Turns to target, calcs hood angle, runs hopper, shoots
+    setJoystickButtonWhileHeld(driverStationJoy, 6, new ShootAutoCommandGroup(shooterSubsystem, funnelSubsystem, neckSubsystem, drivetrainSubsystem));
+    //Rolls in intake
+    setJoystickButtonWhileHeld(driverStationJoy, 7, new RollInCommand(intakeSubsystem));
+    //Runs #4 Backwards
+    setJoystickButtonWhileHeld(driverStationJoy, 8, new ParallelCommandGroup(new RollOutCommand(intakeSubsystem), new MoveDownNeckCommand(neckSubsystem), new FunnelInCommand(funnelSubsystem)));
+    //Calcs angle, runs hopper, shoots, DOESNT TURN)
+//    setJoystickButtonWhenPressed(driverStationJoy, 8, new AdjustHoodAndShootAutoCommandGroup(shooterSubsystem, funnelSubsystem, neckSubsystem));
+    //Retracts Intake (WE NEED TO LOOK AT THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!)
+    setJoystickButtonWhenPressed(driverStationJoy, 9, new ExtendIntakeCommand(intakeSubsystem));
+    //Extends Intake (WE NEED TO LOOK AT THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!)
+    setJoystickButtonWhenPressed(driverStationJoy, 10, new RetractIntakeCommand(intakeSubsystem));
+    //Shifts the gearboxes
+    setJoystickButtonWhenPressed(driverStationJoy, 11, new ToggleShiftingCommand(shiftGearsSubsystem));
+    //Runs the climber with joystick
+    setJoystickButtonWhileHeld(driverStationJoy, 12, new RunCommand(() -> climberSubsystem.toggleClimbUp(getRightY() / 3)));
 
-    setJoystickButtonWhenPressed(driverStationJoy, 8, new AdjustHoodAndShootAutoCommandGroup(shooterSubsystem, funnelSubsystem, neckSubsystem));
 
-    setJoystickButtonWhenPressed(driverStationJoy, 7, new ClimbUpCommand(climberSubsystem));
-    setJoystickButtonWhenPressed(driverStationJoy, 9, new ClimbDownCommand(climberSubsystem));
+    //    setJoystickButtonWhileHeld(driverStationJoy, 1, new RollInCommand(intakeSubsystem));
+    //    setJoystickButtonWhileHeld(driverStationJoy, 2, new SpinFlywheelsCommand(shooterSubsystem));
+    //
+    //    setJoystickButtonWhenPressed(driverStationJoy, 3, new DriveForDistanceCommand(drivetrainSubsystem, 10, .5, .5));
+    //
+    //
+    ////    setJoystickButtonWhenPressed(driverStationJoy, 3, new ShootCommand(shooterSubsystem));
+    //
+    //    //shooting command
+
+    // 
+//    setJoystickButtonWhenPressed(driverStationJoy, 4, new SequentialCommandGroup(
+//                      new SetHoodAngleCommand(shooterSubsystem),
+//                      new ParallelCommandGroup(
+//                              new FunnelInCommand(funnelSubsystem),
+//                              new MoveUpNeckCommand(neckSubsystem),
+//                              new SpinFlywheelsCommand(shooterSubsystem)
+//                      )
+//                ).withInterrupt(() -> !neckSubsystem.getUpperBeamBreak()));
+
+//    //Shoots without turning to target ?????????
+//    setJoystickButtonWhileHeld(driverStationJoy, 6, new ParallelCommandGroup(
+////            new SpinFlywheelsCommand(shooterSubsystem),
+////            new MoveUpNeckCommand(neckSubsystem)
+//    ));
+
+    //Stops Flywheel
+
+
+    //
+
+    // setJoystickButtonWhenPressed(driverStationJoy, 7, new ClimbUpCommand(climberSubsystem));
+    // setJoystickButtonWhenPressed(driverStationJoy, 9, new ClimbDownCommand(climberSubsystem));
 //// //align and shoot
 //     setJoystickButton(leftJoy, 4, new SequentialCommandGroup(
 //             new TurnToTargetCommand(drivetrainSubsystem),
@@ -125,7 +163,7 @@ public class RobotContainer {
 //     setJoystickButton(leftJoy, 5, new TurnToTargetCommand(drivetrainSubsystem));
 
     //toggle climb power. (when button pressed, you can use joystick to toggle power.)
-    setJoystickButtonWhileHeld(driverStationJoy, 12, new RunCommand(() -> climberSubsystem.toggleClimbUp(getRightY())));
+
 
 
   }

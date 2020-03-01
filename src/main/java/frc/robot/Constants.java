@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -34,13 +35,16 @@ public final class Constants {
 
     //intake and hopper constants
     public static final int INTAKE_VICTOR = 0;
-    public static final int FUNNEL_VICTOR = 5;
+    public static final int HOPPER_LEFT_TALON = 8;
+    public static final int HOPPER_RIGHT_TALON = 6;
 
     public static final double ROLL_IN_SPEED = 0.75;
     public static final double ROLL_OUT_SPEED = -0.75;
 
     public static final double FUNNEL_IN_SPEED = 0.5;
     public static final double FUNNEL_OUT_SPEED = -0.5;
+
+    
 
     //neck constants
     public static final int NECK_BELT_TALON = 2;
@@ -53,7 +57,7 @@ public final class Constants {
     public static final double NECK_DOWN_SPEED = -0.5;
 
     //shooter constants
-    public static final int SHOOTER_LEFT_TALON = 6;
+    public static final int SHOOTER_LEFT_TALON = 6666666;
     public static final int SHOOTER_RIGHT_TALON = 5; //right
     public static final int SHOOTER_SERVO_1 = 8;
     public static final int SHOOTER_SERVO_2 = 9;
@@ -66,17 +70,24 @@ public final class Constants {
     public static final double REVERSE_SHOOT_2_SPEED = -0.5;
 
     //climber constants
-    public static final int CLIMBER_TALON_1 = 10; //left
-    public static final int CLIMBER_TALON_2 = 8; //right
+    public static final int CLIMBER_VICTOR_1 = 5; //left
+    public static final int CLIMBER_TALON_2 = 10; //right
 
     public static final double CLIMBER_SPEED = 0.2;
+
+    public static final int CLIMBER_CONT_CURRENT_LIMIT = 15;
+    public static final int CLIMBER_PEAK_CURRENT_LIMIT = 25;
+    public static final int CLIMBER_PEAK_CURRENT_DURATION = 200;
+
+    public static final int TOP_LIMIT_SWITCH = 1;
+    public static final int BOTTOM_LIMIT_SWITCH = 0;
 
     //wheel of fortune constants
     public static final int WHEEL_OF_FORTUNE_TALON = 5;
 
     //pnuematics
-    public static final int[] INTAKE_PISTONS_SOLENOID = {1,2};
-    public static final int[] SHIFTER_SOLENOID = {3,4};
+    public static final int[] INTAKE_PISTONS_SOLENOID = {0,6};
+    public static final int[] SHIFTER_SOLENOID = {1,7};
 
     //driver station constants
     public static final int RIGHT_JOYSTICK = 1;

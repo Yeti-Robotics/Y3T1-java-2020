@@ -10,10 +10,11 @@ public class ShiftGearsSubsystem extends SubsystemBase {
     public enum ShiftStatus{
         HIGH, LOW
     }
-    public static ShiftStatus shiftStatus = ShiftStatus.LOW;
+    public static ShiftStatus shiftStatus;
 
     public ShiftGearsSubsystem() {
         shifter = new DoubleSolenoid(Constants.SHIFTER_SOLENOID[0], Constants.SHIFTER_SOLENOID[1]);
+        shiftStatus = ShiftStatus.LOW;
     }
 
     public void shiftUp() {

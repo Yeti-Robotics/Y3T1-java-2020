@@ -19,6 +19,7 @@ public class RetractIntakeCommand extends CommandBase {
 
     @Override
     public void execute() {
+        //This one actually extends it
         intakeSubsystem.retract();
     }
 

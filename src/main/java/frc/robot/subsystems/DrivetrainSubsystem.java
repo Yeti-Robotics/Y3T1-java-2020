@@ -1,24 +1,14 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.PWMTalonFX;
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
-import frc.robot.Robot;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
-import com.ctre.phoenix.motorcontrol.TalonFXSensorCollection;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
-import org.opencv.video.SparsePyrLKOpticalFlow;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class DrivetrainSubsystem extends SubsystemBase {
     private TalonFX leftFalcon1, rightFalcon1, leftFalcon2, rightFalcon2;
@@ -78,9 +68,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
     @Override
     public void periodic() {
-        double leftY = Robot.robotContainer.getLeftY();
-        double rightY = Robot.robotContainer.getRightY();
-        drive(-0, - 0);
 
         // System.out.println("drivetrain periodic");
 
