@@ -17,6 +17,10 @@ public class ShooterSubsystem extends SubsystemBase {
     public Servo hoodServo1;
     private Servo hoodServo2;
     private double distance;
+    public enum ShooterStatus{
+        FORWARD, BACKWARDS, OFF
+    }
+    public static ShooterStatus shooterStatus;
 
     public ShooterSubsystem() {
         shooterLeftTalon = new TalonSRX(Constants.SHOOTER_LEFT_TALON);
@@ -32,16 +36,19 @@ public class ShooterSubsystem extends SubsystemBase {
     public void shoot() {
         shooterLeftTalon.set(ControlMode.PercentOutput, Constants.SHOOT_1_SPEED);
         shooterRightTalon.set(ControlMode.PercentOutput, Constants.SHOOT_2_SPEED);
+        shooterStatus = ShooterStatus.FORWARD;
     }
 
     public void reverseShoot() {
         shooterLeftTalon.set(ControlMode.PercentOutput, -Constants.REVERSE_SHOOT_1_SPEED);
         shooterRightTalon.set(ControlMode.PercentOutput, Constants.REVERSE_SHOOT_2_SPEED);
+        shooterStatus = ShooterStatus.BACKWARDS;
     }
 
     public void stopShoot() {
         shooterLeftTalon.set(ControlMode.PercentOutput, 0);
         shooterRightTalon.set(ControlMode.PercentOutput, 0);
+        shooterStatus = ShooterStatus.OFF;
     }
 
     public double getLeftEncoder() {
@@ -82,6 +89,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public double getHoodAngle() {
         return hoodServo1.getAngle() * Constants.SERVO_GEAR_RATIO; 
+    }
+
+    public static ShooterStatus getShooterStatus(){
+        return shooterStatus;
     }
 
     public double calcHoodAngle() {

@@ -34,9 +34,9 @@ public final class Constants {
     public static final double LOW_GEAR_RATIO = 19.6/1.0;
 
     //intake and hopper constants
-    public static final int INTAKE_VICTOR = 0;
-    public static final int HOPPER_LEFT_TALON = 8;
-    public static final int HOPPER_RIGHT_TALON = 6;
+    public static final int INTAKE_VICTOR = 2;
+    public static final int HOPPER_LEFT_VICTOR = 5;
+    public static final int HOPPER_RIGHT_VICTOR = 0;
 
     public static final double ROLL_IN_SPEED = 0.75;
     public static final double ROLL_OUT_SPEED = -0.75;
@@ -44,11 +44,9 @@ public final class Constants {
     public static final double FUNNEL_IN_SPEED = 0.5;
     public static final double FUNNEL_OUT_SPEED = -0.5;
 
-    
-
     //neck constants
     public static final int NECK_BELT_TALON = 2;
-    public static final int NECK_ROLLER_TALON = 4;
+    public static final int NECK_ROLLER_TALON = 10;
 
     public static final int UPPER_BEAM_BREAK = 0;
     public static final int LOWER_BEAM_BREAK = 1;
@@ -57,7 +55,7 @@ public final class Constants {
     public static final double NECK_DOWN_SPEED = -0.5;
 
     //shooter constants
-    public static final int SHOOTER_LEFT_TALON = 6666666;
+    public static final int SHOOTER_LEFT_TALON = 6;
     public static final int SHOOTER_RIGHT_TALON = 5; //right
     public static final int SHOOTER_SERVO_1 = 8;
     public static final int SHOOTER_SERVO_2 = 9;
@@ -70,8 +68,8 @@ public final class Constants {
     public static final double REVERSE_SHOOT_2_SPEED = -0.5;
 
     //climber constants
-    public static final int CLIMBER_VICTOR_1 = 5; //left
-    public static final int CLIMBER_TALON_2 = 10; //right
+    public static final int CLIMBER_TALON_1 = 4; //left
+    public static final int CLIMBER_TALON_2 = 8; //right
 
     public static final double CLIMBER_SPEED = 0.2;
 

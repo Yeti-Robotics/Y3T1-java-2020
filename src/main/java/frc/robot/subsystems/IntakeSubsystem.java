@@ -8,10 +8,10 @@ import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
 
-// Any variables/fields used in the constructor must appear before the "INSTANCE" variable
-// so that they are initialized before the constructor is called.
-
-
+    public enum IntakeStatus{
+        DOWN, UP
+    }
+    public static IntakeStatus intakeStatus;
 
     private VictorSPX intakeVictor;
     private DoubleSolenoid pistons;
@@ -24,10 +24,12 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public void extend(){
         pistons.set(DoubleSolenoid.Value.kForward);
+        intakeStatus = intakeStatus.DOWN;
     }
 
     public void retract(){
         pistons.set(DoubleSolenoid.Value.kReverse);
+        intakeStatus = intakeStatus.UP;
     }
 
     public void rollIn(){
@@ -42,6 +44,9 @@ public class IntakeSubsystem extends SubsystemBase {
         intakeVictor.set(ControlMode.PercentOutput, 0);
     }
 
+    public static IntakeStatus getIntakePosition(){
+        return intakeStatus;
+    }
 
 }
 

@@ -11,13 +11,13 @@ import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase {
 
-    private VictorSPX climberTalon1;
+    private TalonSRX climberTalon1;
     private TalonSRX climberTalon2;
     private DigitalInput topLimitSwitch;
     private DigitalInput bottomLimitSwitch;
 
     public ClimberSubsystem() {
-        climberTalon1 = new VictorSPX(Constants.CLIMBER_VICTOR_1);
+        climberTalon1 = new TalonSRX(Constants.CLIMBER_TALON_1);
         climberTalon2 = new TalonSRX(Constants.CLIMBER_TALON_2);
 
         // topLimitSwitch = new DigitalInput(Constants.TOP_LIMIT_SWITCH);

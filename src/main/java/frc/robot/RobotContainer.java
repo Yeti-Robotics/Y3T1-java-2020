@@ -8,27 +8,24 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.autoRoutines.AdjustHoodAndShootAutoCommandGroup;
-import frc.robot.autoRoutines.ShootAutoCommandGroup;
+import frc.robot.autoRoutines.ShootCommandGroup;
 import frc.robot.commands.climbing.ClimbDownCommand;
 import frc.robot.commands.climbing.ClimbUpCommand;
-import frc.robot.commands.drivetrain.DriveForDistanceCommand;
+import frc.robot.commands.drivetrain.TurnToTargetCommand;
+import frc.robot.commands.hopper.HopperOutCommand;
+import frc.robot.commands.intake.IntakeOutCommand;
+import frc.robot.commands.intake.ToggleIntakeCommand;
 import frc.robot.commands.neck.MoveDownNeckCommand;
 import frc.robot.commands.shifting.ToggleShiftingCommand;
 import frc.robot.commands.neck.MoveUpNeckCommand;
-import frc.robot.commands.shooting.SetHoodAngleCommand;
-import frc.robot.commands.intake.ExtendIntakeCommand;
-import frc.robot.commands.shooting.StopSpinCommand;
 import frc.robot.commands.hopper.HopperInCommand;
 import frc.robot.commands.intake.IntakeInCommand;
-import frc.robot.commands.neck.MoveUpNeckCommand;
-import frc.robot.commands.shifting.ToggleShiftingCommand;
 import frc.robot.commands.shooting.StartSpinCommand;
+import frc.robot.commands.shooting.ToggleShooterCommand;
 import frc.robot.subsystems.*;
 //import frc.robot.utils.DoubleButton;
 
@@ -76,24 +73,30 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    setJoystickButtonWhileHeld(driverStationJoy, 1, new IntakeInCommand(intakeSubsystem));
-    setJoystickButtonWhileHeld(driverStationJoy, 2, new MoveUpNeckCommand(neckSubsystem));
-    setJoystickButtonWhileHeld(driverStationJoy, 3, new HopperInCommand(hopperSubsystem));
-    setJoystickButtonWhileHeld(driverStationJoy, 4, new ParallelCommandGroup(new IntakeInCommand(intakeSubsystem),
-        new MoveUpNeckCommand(neckSubsystem), new HopperInCommand(hopperSubsystem)));
-    setJoystickButtonWhileHeld(driverStationJoy, 5, new StartSpinCommand(shooterSubsystem));
-    setJoystickButtonWhenPressed(driverStationJoy, 6,
-        new AdjustHoodAndShootAutoCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem));
-    setJoystickButtonWhenPressed(driverStationJoy, 7,
-        new ShootAutoCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, drivetrainSubsystem));
-    setJoystickButtonWhileHeld(driverStationJoy, 8,
-        new RunCommand(() -> drivetrainSubsystem.drive(0, 0), drivetrainSubsystem));
-    setJoystickButtonWhenPressed(driverStationJoy, 10,
-        new RunCommand(() -> climberSubsystem.stopClimb(), climberSubsystem));
+
+    setJoystickButtonWhileHeld(driverStationJoy, 1, new ParallelCommandGroup(new IntakeOutCommand(intakeSubsystem),
+            new MoveDownNeckCommand(neckSubsystem), new HopperOutCommand(hopperSubsystem)));
+    setJoystickButtonWhenPressed(driverStationJoy, 2, new ToggleShooterCommand(shooterSubsystem));
+    setJoystickButtonWhileHeld(driverStationJoy, 3, new IntakeInCommand(intakeSubsystem));
+    setJoystickButtonWhenPressed(driverStationJoy, 4, new RunCommand(() -> climberSubsystem.stopClimb(), climberSubsystem));
+    setJoystickButtonWhileHeld(driverStationJoy, 5, new ClimbUpCommand(climberSubsystem));
+    setJoystickButtonWhileHeld(driverStationJoy, 6, new ParallelCommandGroup(new IntakeInCommand(intakeSubsystem),
+            new MoveUpNeckCommand(neckSubsystem), new HopperInCommand(hopperSubsystem)));
+    setJoystickButtonWhenPressed(driverStationJoy, 7, new ToggleIntakeCommand(intakeSubsystem));
+    setJoystickButtonWhileHeld(driverStationJoy, 10, new ClimbDownCommand(climberSubsystem));
     setJoystickButtonWhenPressed(driverStationJoy, 11, new ToggleShiftingCommand(shiftGearsSubsystem));
-    setJoystickButtonWhileHeld(driverStationJoy, 12,
-        new ParallelCommandGroup(new RunCommand(() -> drivetrainSubsystem.drive(0, 0), drivetrainSubsystem),
-            new RunCommand(() -> climberSubsystem.toggleClimbUp(getRightY()), climberSubsystem)));
+    setJoystickButtonWhenPressed(driverStationJoy, 12, new TurnToTargetCommand(drivetrainSubsystem));
+
+
+//    setJoystickButtonWhenPressed(driverStationJoy, 9,
+//        new ShootCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, drivetrainSubsystem));
+//    setJoystickButtonWhenPressed(driverStationJoy, 7,
+//        new ShootCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, drivetrainSubsystem));
+//    setJoystickButtonWhileHeld(driverStationJoy, 8,
+//        new RunCommand(() -> drivetrainSubsystem.drive(0, 0), drivetrainSubsystem));
+//    setJoystickButtonWhileHeld(driverStationJoy, 12,
+//        new ParallelCommandGroup(new RunCommand(() -> drivetrainSubsystem.drive(0, 0), drivetrainSubsystem),
+//            new RunCommand(() -> climberSubsystem.toggleClimbUp(getRightY()), climberSubsystem)));
     // setJoystickButtonWhileHeld(driverStationJoy, );
   }
 
