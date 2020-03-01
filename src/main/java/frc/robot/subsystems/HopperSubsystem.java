@@ -6,11 +6,11 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class FunnelSubsystem extends SubsystemBase {
+public class HopperSubsystem extends SubsystemBase {
 
     private TalonSRX funnelTalonLeft, funnelTalonRight;
 
-    public FunnelSubsystem() {
+    public HopperSubsystem() {
         funnelTalonLeft = new TalonSRX(Constants.HOPPER_LEFT_TALON);
         funnelTalonRight = new TalonSRX(Constants.HOPPER_RIGHT_TALON);
     }

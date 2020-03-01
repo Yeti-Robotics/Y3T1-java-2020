@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
 
   private ShooterSubsystem shooterSubsystem;
 
-  private FunnelSubsystem funnelSubsystem;
+  private HopperSubsystem hopperSubsystem;
 
   private NeckSubsystem neckSubsystem;
 
@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
 //  private DrivetrainSubsystem drivetrainSubsystem;
 //  private NeckSubsystem neckSubsystem;
 //  private ShooterSubsystem shooterSubsystem;
-//  private FunnelSubsystem funnelSubsystem;
+//  private FunnelSubsystem hopperSubsystem;
 
   public static RobotContainer robotContainer;
 //  private ShootAutoCommandGroup shootAutoCommandGroup;
@@ -66,9 +66,9 @@ public class Robot extends TimedRobot {
 //    drivetrainSubsystem = new DrivetrainSubsystem();
 //    neckSubsystem = new NeckSubsystem();
 //    shooterSubsystem = new ShooterSubsystem();
-//    funnelSubsystem = new FunnelSubsystem();
+//    hopperSubsystem = new FunnelSubsystem();
 //
-//    shootAutoCommandGroup = new ShootAutoCommandGroup(shooterSubsystem, funnelSubsystem, neckSubsystem, drivetrainSubsystem);
+//    shootAutoCommandGroup = new ShootAutoCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, drivetrainSubsystem);
 //    shootAutoCommandGroup = new ShootAutoCommandGroup(robotContainer.shooterS);
 
   }
@@ -138,7 +138,7 @@ public class Robot extends TimedRobot {
 //m_autonomousCommand =  shootAutoCommandGroup;
     // schedule the autonomous command (example)
 
-    m_autonomousCommand = new  ShootAutoCommandGroup(shooterSubsystem, funnelSubsystem, neckSubsystem, drivetrainSubsystem);
+    m_autonomousCommand = new  ShootAutoCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, drivetrainSubsystem);
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
