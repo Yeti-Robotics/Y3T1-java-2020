@@ -7,11 +7,11 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class FunnelSubsystem extends SubsystemBase {
+public class HopperSubsystem extends SubsystemBase {
 
     private VictorSPX funnelVictor;
 
-    public FunnelSubsystem() {
+    public HopperSubsystem() {
         funnelVictor = new VictorSPX(Constants.FUNNEL_VICTOR);
     }
 

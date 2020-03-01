@@ -34,6 +34,7 @@ public class NeckSubsystem extends SubsystemBase {
         neckRollerTalon.set(ControlMode.PercentOutput, 0);
     }
 
+
     public boolean getLowerBeamBreak() {
         return lowerBeamBreak.get();
     }

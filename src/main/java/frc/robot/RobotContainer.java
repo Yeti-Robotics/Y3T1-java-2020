@@ -7,27 +7,24 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autoRoutines.AdjustHoodAndShootAutoCommandGroup;
+import frc.robot.autoRoutines.ShootAutoCommandGroup;
 import frc.robot.commands.climbing.ClimbDownCommand;
 import frc.robot.commands.climbing.ClimbUpCommand;
-import frc.robot.commands.drivetrain.DriveForDistanceCommand;
-import frc.robot.commands.shifting.ToggleShiftingCommand;
-import frc.robot.commands.funnel.FunnelInCommand;
+import frc.robot.commands.hopper.HopperInCommand;
+import frc.robot.commands.intake.IntakeInCommand;
 import frc.robot.commands.neck.MoveUpNeckCommand;
-import frc.robot.commands.shooting.SetHoodAngleCommand;
-import frc.robot.commands.shooting.SpinFlywheelsCommand;
-import frc.robot.commands.intake.RollInCommand;
-import frc.robot.commands.shooting.StopSpinningCommand;
+import frc.robot.commands.shifting.ToggleShiftingCommand;
+import frc.robot.commands.shooting.StartSpinCommand;
 import frc.robot.subsystems.*;
+//import frc.robot.utils.DoubleButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -47,87 +44,42 @@ public class RobotContainer {
   private IntakeSubsystem intakeSubsystem;
   private NeckSubsystem neckSubsystem;
   private ShooterSubsystem shooterSubsystem;
-  private FunnelSubsystem funnelSubsystem;
+  private HopperSubsystem hopperSubsystem;
   private ClimberSubsystem climberSubsystem;
   private ShiftGearsSubsystem shiftGearsSubsystem;
+//  private DoubleButton toggleClimb;
 
-  /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
-   */
   public RobotContainer() {
-//    leftJoy = new Joystick(Constants.LEFT_JOYSTICK);
-//    rightJoy = new Joystick(Constants.RIGHT_JOYSTICK);
-//    secondaryJoy = new Joystick(Constants.SECONDARY_JOYSTICK);
     driverStationJoy = new Joystick(Constants.DRIVER_STATION_JOY);
 
     drivetrainSubsystem = new DrivetrainSubsystem();
-//    wheelOfFortuneSubsystem = new WheelOfFortuneSubsystem();
     intakeSubsystem = new IntakeSubsystem();
     neckSubsystem = new NeckSubsystem();
     shooterSubsystem = new ShooterSubsystem();
-    funnelSubsystem = new FunnelSubsystem();
+    hopperSubsystem = new HopperSubsystem();
     shiftGearsSubsystem = new ShiftGearsSubsystem();
-
+    climberSubsystem = new ClimberSubsystem();
+//    JoystickButton button8 = new JoystickButton(driverStationJoy, 8);
+//    JoystickButton button11 = new JoystickButton(driverStationJoy, 11);
+//    toggleClimb = new DoubleButton( button8, button11);
      drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(-0, -0), drivetrainSubsystem));
      shooterSubsystem.setDefaultCommand(new RunCommand(() -> shooterSubsystem.setHoodAngle(getLeftThrottle()*180), shooterSubsystem));
-    // Configure the button bindings
     configureButtonBindings();
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be
-   * created by instantiating a {@link GenericHID} or one of its subclasses
-   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
-   * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
   private void configureButtonBindings() {
+    setJoystickButtonWhileHeld(driverStationJoy, 1, new IntakeInCommand(intakeSubsystem));
+    setJoystickButtonWhileHeld(driverStationJoy, 2, new MoveUpNeckCommand(neckSubsystem));
+    setJoystickButtonWhileHeld(driverStationJoy, 3, new HopperInCommand(hopperSubsystem));
+    setJoystickButtonWhileHeld(driverStationJoy, 4, new ParallelCommandGroup(new IntakeInCommand(intakeSubsystem), new MoveUpNeckCommand(neckSubsystem), new HopperInCommand(hopperSubsystem)));
+    setJoystickButtonWhileHeld(driverStationJoy, 5, new StartSpinCommand(shooterSubsystem));
+    setJoystickButtonWhenPressed(driverStationJoy, 6, new AdjustHoodAndShootAutoCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem));
+    setJoystickButtonWhenPressed(driverStationJoy, 7, new ShootAutoCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, drivetrainSubsystem));
+    setJoystickButtonWhileHeld(driverStationJoy, 8, new RunCommand(()-> drivetrainSubsystem.drive(0, 0), drivetrainSubsystem));
+    setJoystickButtonWhenPressed(driverStationJoy, 10, new RunCommand(() -> climberSubsystem.stopClimb(), climberSubsystem));
     setJoystickButtonWhenPressed(driverStationJoy, 11, new ToggleShiftingCommand(shiftGearsSubsystem));
-    setJoystickButtonWhileHeld(driverStationJoy, 1, new RollInCommand(intakeSubsystem));
-    setJoystickButtonWhileHeld(driverStationJoy, 2, new SpinFlywheelsCommand(shooterSubsystem));
-
-    setJoystickButtonWhenPressed(driverStationJoy, 3, new DriveForDistanceCommand(drivetrainSubsystem, 10, .5, .5));
-
-
-//    setJoystickButtonWhenPressed(driverStationJoy, 3, new ShootCommand(shooterSubsystem));
-
-    //shooting command
-    setJoystickButtonWhenPressed(driverStationJoy, 4, new SequentialCommandGroup(
-                      new SetHoodAngleCommand(shooterSubsystem),
-                      new ParallelCommandGroup(
-                              new FunnelInCommand(funnelSubsystem),
-                              new MoveUpNeckCommand(neckSubsystem),
-                              new SpinFlywheelsCommand(shooterSubsystem)
-                      )
-                ).withInterrupt(() -> !neckSubsystem.getUpperBeamBreak()));
-
-    setJoystickButtonWhileHeld(driverStationJoy, 6, new ParallelCommandGroup(
-            new SpinFlywheelsCommand(shooterSubsystem),
-            new MoveUpNeckCommand(neckSubsystem)
-    ));
-
-    setJoystickButtonWhenPressed(driverStationJoy, 5, new ParallelCommandGroup(
-            new StopSpinningCommand(shooterSubsystem)
-    ));
-
-    setJoystickButtonWhenPressed(driverStationJoy, 8, new AdjustHoodAndShootAutoCommandGroup(shooterSubsystem, funnelSubsystem, neckSubsystem));
-
-    setJoystickButtonWhenPressed(driverStationJoy, 7, new ClimbUpCommand(climberSubsystem));
-    setJoystickButtonWhenPressed(driverStationJoy, 9, new ClimbDownCommand(climberSubsystem));
-//// //align and shoot
-//     setJoystickButton(leftJoy, 4, new SequentialCommandGroup(
-//             new TurnToTargetCommand(drivetrainSubsystem),
-//             new SetHoodAngleCommand(shooterSubsystem, shooterSubsystem.calcHoodAngle()),
-//             new ParallelCommandGroup(
-//                     new MoveUpNeckCommand(neckSubsystem),
-//                     new ShootCommand(shooterSubsystem)
-//             )
-//       ));
-//     setJoystickButton(leftJoy, 5, new TurnToTargetCommand(drivetrainSubsystem));
-
-    //toggle climb power. (when button pressed, you can use joystick to toggle power.)
-    setJoystickButtonWhileHeld(driverStationJoy, 12, new RunCommand(() -> climberSubsystem.toggleClimbUp(getRightY())));
-
-
+    setJoystickButtonWhileHeld(driverStationJoy, 12, new ParallelCommandGroup(new RunCommand(()-> drivetrainSubsystem.drive(0,0),drivetrainSubsystem), new RunCommand(()-> climberSubsystem.toggleClimbUp(getRightY()), climberSubsystem)));
+//    setJoystickButtonWhileHeld(driverStationJoy, );
   }
 
   public double getLeftY() {
@@ -152,11 +104,6 @@ public class RobotContainer {
     return driverStationJoy.getX();
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
   public double getLeftThrottle() {
     return (driverStationJoy.getThrottle()+1)/2;
   }
@@ -169,4 +116,13 @@ public class RobotContainer {
   private void setJoystickButtonWhileHeld(Joystick joystick, int button, CommandBase command){
     new JoystickButton(joystick, button).whileHeld(command);
   }
+
+  //playing with pressing both buttons to execute a command different from the command bound to pressing a button by itself
+//  private void  setJoystickButtonsWhileHeld(Joystick joystick, int button1, int button2, Command command){
+//    JoystickButton ButtonOne = new JoystickButton(joystick, button1);
+//    JoystickButton ButtonTwo = new JoystickButton(joystick, button2);
+//
+//    DoubleButton doubleButton = new DoubleButton(ButtonOne, ButtonTwo);
+//    doubleButton.whileHeld(command);
+//  }
 }
