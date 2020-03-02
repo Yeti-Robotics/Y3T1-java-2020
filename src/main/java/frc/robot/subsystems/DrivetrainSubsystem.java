@@ -21,9 +21,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
         rightFalcon2 = new TalonFX(Constants.RIGHT_FALCON_2);
         leftFalcon1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
         rightFalcon1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
-        
+
+
+
         rightFalcon1.setInverted(true);
         rightFalcon2.setInverted(true);
+
+        // metalShavings = 42069;
 
         // leftFalcon2.follow(leftFalcon1);
         // rightFalcon2.follow(rightFalcon1);
@@ -31,11 +35,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     }
 
+
+
     public void drive(double leftPower, double rightPower) {
-       leftFalcon1.set(ControlMode.PercentOutput, leftPower);
-       leftFalcon2.set(ControlMode.PercentOutput, leftPower);
-       rightFalcon1.set(ControlMode.PercentOutput, rightPower);
-       rightFalcon2.set(ControlMode.PercentOutput, rightPower);
+        leftFalcon1.set(ControlMode.PercentOutput, leftPower);
+        leftFalcon2.set(ControlMode.PercentOutput, leftPower);
+        rightFalcon1.set(ControlMode.PercentOutput, rightPower);
+        rightFalcon2.set(ControlMode.PercentOutput, rightPower);
     }
 
     public void stopDrive() {

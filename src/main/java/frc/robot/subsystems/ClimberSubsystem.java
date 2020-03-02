@@ -20,6 +20,8 @@ public class ClimberSubsystem extends SubsystemBase {
         climberTalon1 = new TalonSRX(Constants.CLIMBER_TALON_1);
         climberTalon2 = new TalonSRX(Constants.CLIMBER_TALON_2);
 
+        climberTalon1.setInverted(true);
+
         // topLimitSwitch = new DigitalInput(Constants.TOP_LIMIT_SWITCH);
         // bottomLimitSwitch = new DigitalInput(Constants.BOTTOM_LIMIT_SWITCH);
 

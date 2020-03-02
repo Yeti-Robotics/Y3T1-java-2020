@@ -66,7 +66,7 @@ public class RobotContainer {
     // JoystickButton button8 = new JoystickButton(driverStationJoy, 8);
     // JoystickButton button11 = new JoystickButton(driverStationJoy, 11);
     // toggleClimb = new DoubleButton( button8, button11);
-    drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(-0, -0), drivetrainSubsystem));
+    drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(getLeftY(), getRightY()), drivetrainSubsystem));
     shooterSubsystem.setDefaultCommand(
         new RunCommand(() -> shooterSubsystem.setHoodAngle(getLeftThrottle() * 180), shooterSubsystem));
     configureButtonBindings();
@@ -76,13 +76,15 @@ public class RobotContainer {
 
     setJoystickButtonWhileHeld(driverStationJoy, 1, new ParallelCommandGroup(new IntakeOutCommand(intakeSubsystem),
             new MoveDownNeckCommand(neckSubsystem), new HopperOutCommand(hopperSubsystem)));
-    setJoystickButtonWhenPressed(driverStationJoy, 2, new ToggleShooterCommand(shooterSubsystem));
-    setJoystickButtonWhileHeld(driverStationJoy, 3, new IntakeInCommand(intakeSubsystem));
-    setJoystickButtonWhenPressed(driverStationJoy, 4, new RunCommand(() -> climberSubsystem.stopClimb(), climberSubsystem));
-    setJoystickButtonWhileHeld(driverStationJoy, 5, new ClimbUpCommand(climberSubsystem));
     setJoystickButtonWhileHeld(driverStationJoy, 6, new ParallelCommandGroup(new IntakeInCommand(intakeSubsystem),
             new MoveUpNeckCommand(neckSubsystem), new HopperInCommand(hopperSubsystem)));
+    setJoystickButtonWhenPressed(driverStationJoy, 2, new ToggleShooterCommand(shooterSubsystem));
     setJoystickButtonWhenPressed(driverStationJoy, 7, new ToggleIntakeCommand(intakeSubsystem));
+//    setJoystickButtonWhenPressed(driverStationJoy, 8, new ShootCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, drivetrainSubsystem));
+    setJoystickButtonWhileHeld(driverStationJoy, 3, new RunCommand(()->climberSubsystem.toggleClimbUp(getRightY()),climberSubsystem));
+    setJoystickButtonWhenPressed(driverStationJoy, 4, new RunCommand(() -> climberSubsystem.stopClimb(), climberSubsystem));
+//    setJoystickButtonWhileHeld(driverStationJoy, 9, new ParallelCommandGroup(new ));
+    setJoystickButtonWhileHeld(driverStationJoy, 5, new ClimbUpCommand(climberSubsystem));
     setJoystickButtonWhileHeld(driverStationJoy, 10, new ClimbDownCommand(climberSubsystem));
     setJoystickButtonWhenPressed(driverStationJoy, 11, new ToggleShiftingCommand(shiftGearsSubsystem));
     setJoystickButtonWhenPressed(driverStationJoy, 12, new TurnToTargetCommand(drivetrainSubsystem));

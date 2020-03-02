@@ -28,7 +28,7 @@ public final class Constants {
     public static final double kTurnI = 0;
     public static final double kTurnD = .005;
 
-    public static final double DISTANCE_PER_PULSE = (6 * Math.PI) / 2048;
+    public static final double DISTANCE_PER_PULSE = (6 * Math.PI) / 2048; //inches
 
     public static final double HIGH_GEAR_RATIO = 9.0/1.0;
     public static final double LOW_GEAR_RATIO = 19.6/1.0;
@@ -55,7 +55,7 @@ public final class Constants {
     public static final double NECK_DOWN_SPEED = -0.5;
 
     //shooter constants
-    public static final int SHOOTER_LEFT_TALON = 6;
+    public static final int SHOOTER_LEFT_TALON = 6; //left
     public static final int SHOOTER_RIGHT_TALON = 5; //right
     public static final int SHOOTER_SERVO_1 = 8;
     public static final int SHOOTER_SERVO_2 = 9;
@@ -71,7 +71,7 @@ public final class Constants {
     public static final int CLIMBER_TALON_1 = 4; //left
     public static final int CLIMBER_TALON_2 = 8; //right
 
-    public static final double CLIMBER_SPEED = 0.2;
+    public static final double CLIMBER_SPEED = 0.6;
 
     public static final int CLIMBER_CONT_CURRENT_LIMIT = 15;
     public static final int CLIMBER_PEAK_CURRENT_LIMIT = 25;
@@ -84,8 +84,8 @@ public final class Constants {
     public static final int WHEEL_OF_FORTUNE_TALON = 5;
 
     //pnuematics
-    public static final int[] INTAKE_PISTONS_SOLENOID = {0,6};
-    public static final int[] SHIFTER_SOLENOID = {1,7};
+    public static final int[] INTAKE_PISTONS_SOLENOID = {1,6};
+    public static final int[] SHIFTER_SOLENOID = {0,7};
 
     //driver station constants
     public static final int RIGHT_JOYSTICK = 1;
