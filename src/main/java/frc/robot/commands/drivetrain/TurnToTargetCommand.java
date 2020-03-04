@@ -36,7 +36,7 @@ public class TurnToTargetCommand extends PIDCommand {
                     public void accept(double value) {
                       //  System.out.println("PID:" + value);
                         //drivetrainSubsystem.drive(-value, -value);
-                        drivetrainSubsystem.driveWithMinPower(-value, -value, .2);
+//                        drivetrainSubsystem.driveWithMinPower(-value, -value, .2);
                     }
                 },
                 // Require the drive
@@ -50,21 +50,21 @@ public class TurnToTargetCommand extends PIDCommand {
         addRequirements(drivetrainSubsystem);
     }
 
-//    @Override
-//    public void initialize() {
-//
-//    }
-//
-//    @Override
-//    public void execute() {
-//        if(Limelight.getTx()<0){
-//            drivetrainSubsystem.drive(-0.4,0.4);
-//            System.out.println("turning left");
-//        }else if(Limelight.getTx()>0){
-//            drivetrainSubsystem.drive(0.4,-0.4);
-//            System.out.println("turning right");
-//        }
-//    }
+    @Override
+    public void initialize() {
+
+    }
+
+    @Override
+    public void execute() {
+        if(Limelight.getTx()<0){
+            drivetrainSubsystem.drive(-0.4,0.4);
+            System.out.println("turning left");
+        }else if(Limelight.getTx()>0){
+            drivetrainSubsystem.drive(0.4,-0.4);
+            System.out.println("turning right");
+        }
+    }
 
     @Override
     public boolean isFinished() {

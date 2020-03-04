@@ -57,9 +57,9 @@ public final class Constants {
     //shooter constants
     public static final int SHOOTER_LEFT_TALON = 6; //left
     public static final int SHOOTER_RIGHT_TALON = 5; //right
-    public static final int SHOOTER_SERVO_1 = 8;
-    public static final int SHOOTER_SERVO_2 = 9;
-    public static final double SERVO_GEAR_RATIO = 25.0 / 96;
+    public static final int SHOOTER_SERVO_1 = 0;
+    public static final int SHOOTER_SERVO_2 = 1;
+    public static final double SERVO_GEAR_RATIO = 32.0 / 96;
     public static final double SERVO_RATIO = 0.72;
 
     public static final double SHOOT_1_SPEED = 0.9;

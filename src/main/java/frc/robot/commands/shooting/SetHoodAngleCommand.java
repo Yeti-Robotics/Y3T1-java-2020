@@ -11,6 +11,7 @@ public class SetHoodAngleCommand extends CommandBase {
     public SetHoodAngleCommand(ShooterSubsystem shooterSubsystem) {
         this.shooterSubsystem = shooterSubsystem;
         addRequirements(shooterSubsystem);
+
     }
 
     @Override
@@ -20,12 +21,15 @@ public class SetHoodAngleCommand extends CommandBase {
 
     @Override
     public void execute() {
-        shooterSubsystem.setHoodAngle(hoodAngle);
+        if(hoodAngle != Double.NaN){
+            shooterSubsystem.setHoodAngle(hoodAngle);
+        }
     }
 
     @Override
     public boolean isFinished() {
         // TODO: Make this return true when this Command no longer needs to run execute()
+        System.out.println("is sethoodanglecommand done?" + (shooterSubsystem.getHoodAngle() >= hoodAngle));
         return shooterSubsystem.getHoodAngle() >= hoodAngle;
     }
 

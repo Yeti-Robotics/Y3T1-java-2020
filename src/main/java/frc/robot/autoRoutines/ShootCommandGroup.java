@@ -19,10 +19,10 @@ public class ShootCommandGroup extends SequentialCommandGroup {
             super();
         addCommands(
                 new StartSpinCommand(shooterSubsystem),
-                new ParallelCommandGroup(
-                        new TurnToTargetCommand(drivetrainSubsystem),
-                        new SetHoodAngleCommand(shooterSubsystem)
-                ),
+//                new ParallelCommandGroup(
+//                        new TurnToTargetCommand(drivetrainSubsystem),
+//                        new SetHoodAngleCommand(shooterSubsystem)
+//                ),
                 new ParallelCommandGroup(
                         new HopperInCommand(hopperSubsystem),
                         new MoveUpNeckCommand(neckSubsystem)

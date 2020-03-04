@@ -25,16 +25,23 @@ public class DriveForDistanceCommand extends CommandBase {
 
     @Override
     public void execute() {
+
+        System.out.println("drive train encoder value" + drivetrainSubsystem.getAverageEncoder());
+        System.out.println("left, right" + leftPower +";" + rightPower);
         drivetrainSubsystem.drive(leftPower, rightPower);
     }
 
     @Override
     public boolean isFinished() {
-        return distanceGoal == this.drivetrainSubsystem.getAverageEncoder();
+        System.out.println("is finished!!!!!!!!");
+        System.out.println(this.drivetrainSubsystem.getAverageEncoder() >= distanceGoal);
+        return this.drivetrainSubsystem.getAverageEncoder() >= distanceGoal;
+
     }
 
     @Override
     public void end(boolean interrupted) {
-
+        System.out.println("is ended !!!!!!!!!!");
+        drivetrainSubsystem.stopDrive();
     }
 }
