@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -10,10 +11,11 @@ public class ShiftGearsSubsystem extends SubsystemBase {
     public enum ShiftStatus{
         HIGH, LOW
     }
-    public static ShiftStatus shiftStatus = ShiftStatus.LOW;
+    public static ShiftStatus shiftStatus;
 
     public ShiftGearsSubsystem() {
         shifter = new DoubleSolenoid(Constants.SHIFTER_SOLENOID[0], Constants.SHIFTER_SOLENOID[1]);
+        shiftStatus = ShiftStatus.LOW;
     }
 
     public void shiftUp() {
@@ -26,6 +28,8 @@ public class ShiftGearsSubsystem extends SubsystemBase {
         shifter.set(DoubleSolenoid.Value.kReverse);
         shiftStatus = ShiftStatus.LOW;
     }
+
+
 
     //Finds out what position the shifter is currently in
     public static ShiftStatus getShifterPosition() {

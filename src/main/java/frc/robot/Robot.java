@@ -12,11 +12,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
-import frc.robot.autoRoutines.ShootAutoCommandGroup;
+import frc.robot.autoRoutines.ShootCommandGroup;
+
+import edu.wpi.first.wpilibj.command.Scheduler;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import frc.robot.autoRoutines.ShootNoTurnCommandGroup;
+import frc.robot.commands.drivetrain.DriveForDistanceCommand;
+import frc.robot.subsystems.*;
 import frc.robot.utils.Limelight;
 
 /**
@@ -28,8 +33,21 @@ import frc.robot.utils.Limelight;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
+  private ShooterSubsystem shooterSubsystem;
+
+  private HopperSubsystem hopperSubsystem;
+
+  private NeckSubsystem neckSubsystem;
+
+  private DrivetrainSubsystem drivetrainSubsystem;
+
+//  private DrivetrainSubsystem drivetrainSubsystem;
+//  private NeckSubsystem neckSubsystem;
+//  private ShooterSubsystem shooterSubsystem;
+//  private FunnelSubsystem hopperSubsystem;
+
   public static RobotContainer robotContainer;
-  private ShootAutoCommandGroup shootAutoCommandGroup;
+//  private ShootAutoCommandGroup shootAutoCommandGroup;
 
 
   /**
@@ -46,6 +64,14 @@ public class Robot extends TimedRobot {
 
     
     robotContainer = new RobotContainer();
+    drivetrainSubsystem = new DrivetrainSubsystem();
+//
+//    drivetrainSubsystem = new DrivetrainSubsystem();
+//    neckSubsystem = new NeckSubsystem();
+//    shooterSubsystem = new ShooterSubsystem();
+//    hopperSubsystem = new FunnelSubsystem();
+//
+//    shootAutoCommandGroup = new ShootAutoCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, drivetrainSubsystem);
 //    shootAutoCommandGroup = new ShootAutoCommandGroup(robotContainer.shooterS);
 
   }
@@ -112,13 +138,22 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-m_autonomousCommand =  shootAutoCommandGroup;
+//m_autonomousCommand =  shootAutoCommandGroup;
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }
-  }
 
+    m_autonomousCommand = new DriveForDistanceCommand(drivetrainSubsystem, 12, .5, .5);
+
+    if (m_autonomousCommand !=  null) {
+      m_autonomousCommand.initialize();
+      m_autonomousCommand.execute();
+      m_autonomousCommand.schedule();
+    } else {
+      m_autonomousCommand.cancel();
+    }
+
+
+  }
+   
   /**
    * This function is called periodically during autonomous.
    */
@@ -129,9 +164,10 @@ m_autonomousCommand =  shootAutoCommandGroup;
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.cancel();
+    // }
+    Scheduler.getInstance().run();
 
   }
 

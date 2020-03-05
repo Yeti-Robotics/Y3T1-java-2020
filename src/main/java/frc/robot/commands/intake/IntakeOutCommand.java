@@ -15,7 +15,6 @@ public class IntakeOutCommand extends CommandBase {
 
     @Override
     public void initialize() {
-
     }
 
     @Override

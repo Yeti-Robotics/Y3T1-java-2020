@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -27,14 +28,15 @@ public final class Constants {
     public static final double kTurnI = 0;
     public static final double kTurnD = .005;
 
-    public static final double DISTANCE_PER_PULSE = (6 * Math.PI) / 2048;
+    public static final double DISTANCE_PER_PULSE = (6 * Math.PI) / 2048; //inches
 
     public static final double HIGH_GEAR_RATIO = 9.0/1.0;
     public static final double LOW_GEAR_RATIO = 19.6/1.0;
 
     //intake and hopper constants
-    public static final int INTAKE_VICTOR = 0;
-    public static final int FUNNEL_VICTOR = 5;
+    public static final int INTAKE_VICTOR = 2;
+    public static final int HOPPER_LEFT_VICTOR = 5;
+    public static final int HOPPER_RIGHT_VICTOR = 0;
 
     public static final double ROLL_IN_SPEED = 0.75;
     public static final double ROLL_OUT_SPEED = -0.75;
@@ -44,7 +46,7 @@ public final class Constants {
 
     //neck constants
     public static final int NECK_BELT_TALON = 2;
-    public static final int NECK_ROLLER_TALON = 4;
+    public static final int NECK_ROLLER_TALON = 10;
 
     public static final int UPPER_BEAM_BREAK = 0;
     public static final int LOWER_BEAM_BREAK = 1;
@@ -53,11 +55,11 @@ public final class Constants {
     public static final double NECK_DOWN_SPEED = -0.5;
 
     //shooter constants
-    public static final int SHOOTER_LEFT_TALON = 6;
+    public static final int SHOOTER_LEFT_TALON = 6; //left
     public static final int SHOOTER_RIGHT_TALON = 5; //right
-    public static final int SHOOTER_SERVO_1 = 8;
-    public static final int SHOOTER_SERVO_2 = 9;
-    public static final double SERVO_GEAR_RATIO = 25.0 / 96;
+    public static final int SHOOTER_SERVO_1 = 0;
+    public static final int SHOOTER_SERVO_2 = 1;
+    public static final double SERVO_GEAR_RATIO = 32.0 / 96;
     public static final double SERVO_RATIO = 0.72;
 
     public static final double SHOOT_1_SPEED = 0.9;
@@ -66,17 +68,24 @@ public final class Constants {
     public static final double REVERSE_SHOOT_2_SPEED = -0.5;
 
     //climber constants
-    public static final int CLIMBER_TALON_1 = 10; //left
+    public static final int CLIMBER_TALON_1 = 4; //left
     public static final int CLIMBER_TALON_2 = 8; //right
 
-    public static final double CLIMBER_SPEED = 0.2;
+    public static final double CLIMBER_SPEED = 0.6;
+
+    public static final int CLIMBER_CONT_CURRENT_LIMIT = 15;
+    public static final int CLIMBER_PEAK_CURRENT_LIMIT = 25;
+    public static final int CLIMBER_PEAK_CURRENT_DURATION = 200;
+
+    public static final int TOP_LIMIT_SWITCH = 1;
+    public static final int BOTTOM_LIMIT_SWITCH = 0;
 
     //wheel of fortune constants
     public static final int WHEEL_OF_FORTUNE_TALON = 5;
 
     //pnuematics
-    public static final int[] INTAKE_PISTONS_SOLENOID = {1,2};
-    public static final int[] SHIFTER_SOLENOID = {3,4};
+    public static final int[] INTAKE_PISTONS_SOLENOID = {1,6};
+    public static final int[] SHIFTER_SOLENOID = {0,7};
 
     //driver station constants
     public static final int RIGHT_JOYSTICK = 1;

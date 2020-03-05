@@ -14,19 +14,19 @@ import frc.robot.subsystems.HopperSubsystem;
 import frc.robot.subsystems.NeckSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class ShootAutoCommandGroup extends SequentialCommandGroup {
-    public ShootAutoCommandGroup(ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem, NeckSubsystem neckSubsystem, DrivetrainSubsystem drivetrainSubsystem) {
-        super();
+public class ShootCommandGroup extends SequentialCommandGroup {
+    public ShootCommandGroup(ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem, NeckSubsystem neckSubsystem, DrivetrainSubsystem drivetrainSubsystem) {
+            super();
         addCommands(
                 new StartSpinCommand(shooterSubsystem),
-                new ParallelCommandGroup(
-                        new TurnToTargetCommand(drivetrainSubsystem),
-                        new SetHoodAngleCommand(shooterSubsystem)
-                ),
+//                new ParallelCommandGroup(
+//                        new TurnToTargetCommand(drivetrainSubsystem),
+//                        new SetHoodAngleCommand(shooterSubsystem)
+//                ),
                 new ParallelCommandGroup(
                         new HopperInCommand(hopperSubsystem),
                         new MoveUpNeckCommand(neckSubsystem)
-                ),
+                ).withTimeout(6),
                 new StopSpinCommand(shooterSubsystem)
         );
     }

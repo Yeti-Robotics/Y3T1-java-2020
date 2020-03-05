@@ -1,30 +1,35 @@
 package frc.robot.subsystems;
 
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class HopperSubsystem extends SubsystemBase {
 
-    private VictorSPX funnelVictor;
+    private VictorSPX hopperVictorLeft, hopperVictorRight;
 
     public HopperSubsystem() {
-        funnelVictor = new VictorSPX(Constants.FUNNEL_VICTOR);
+        hopperVictorLeft = new VictorSPX(Constants.HOPPER_LEFT_VICTOR);
+        hopperVictorRight = new VictorSPX(Constants.HOPPER_RIGHT_VICTOR);
     }
 
     public void funnelIn() {
-        funnelVictor.set(ControlMode.PercentOutput, Constants.FUNNEL_IN_SPEED);
+        hopperVictorLeft.set(ControlMode.PercentOutput, Constants.FUNNEL_IN_SPEED);
+        hopperVictorRight.set(ControlMode.PercentOutput, -Constants.FUNNEL_IN_SPEED);
     }
 
     public void funnelOut() {
-        funnelVictor.set(ControlMode.PercentOutput, Constants.FUNNEL_OUT_SPEED);
+        hopperVictorLeft.set(ControlMode.PercentOutput, Constants.FUNNEL_OUT_SPEED);
+        hopperVictorRight.set(ControlMode.PercentOutput, -Constants.FUNNEL_OUT_SPEED);
     }
 
     public void funnelStop() {
-        funnelVictor.set(ControlMode.PercentOutput, 0);
+        hopperVictorLeft.set(ControlMode.PercentOutput, 0);
+        hopperVictorRight.set(ControlMode.PercentOutput, 0);
     }
 }
 

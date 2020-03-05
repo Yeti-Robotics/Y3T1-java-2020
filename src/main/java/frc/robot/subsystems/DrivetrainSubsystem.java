@@ -1,24 +1,14 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.PWMTalonFX;
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
-import frc.robot.Robot;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
-import com.ctre.phoenix.motorcontrol.TalonFXSensorCollection;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
-import org.opencv.video.SparsePyrLKOpticalFlow;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class DrivetrainSubsystem extends SubsystemBase {
     private TalonFX leftFalcon1, rightFalcon1, leftFalcon2, rightFalcon2;
@@ -31,9 +21,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
         rightFalcon2 = new TalonFX(Constants.RIGHT_FALCON_2);
         leftFalcon1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
         rightFalcon1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
-        
+
+
+
         rightFalcon1.setInverted(true);
         rightFalcon2.setInverted(true);
+
+        // metalShavings = 42069;
 
         // leftFalcon2.follow(leftFalcon1);
         // rightFalcon2.follow(rightFalcon1);
@@ -41,11 +35,13 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     }
 
+
+
     public void drive(double leftPower, double rightPower) {
-       leftFalcon1.set(ControlMode.PercentOutput, leftPower);
-       leftFalcon2.set(ControlMode.PercentOutput, leftPower);
-       rightFalcon1.set(ControlMode.PercentOutput, rightPower);
-       rightFalcon2.set(ControlMode.PercentOutput, rightPower);
+        leftFalcon1.set(ControlMode.PercentOutput, leftPower);
+        leftFalcon2.set(ControlMode.PercentOutput, leftPower);
+        rightFalcon1.set(ControlMode.PercentOutput, rightPower);
+        rightFalcon2.set(ControlMode.PercentOutput, rightPower);
     }
 
     public void stopDrive() {
@@ -78,9 +74,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
     @Override
     public void periodic() {
-        double leftY = Robot.robotContainer.getLeftY();
-        double rightY = Robot.robotContainer.getRightY();
-        drive(-0, - 0);
 
         // System.out.println("drivetrain periodic");
 
