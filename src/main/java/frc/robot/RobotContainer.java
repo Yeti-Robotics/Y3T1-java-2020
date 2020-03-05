@@ -69,32 +69,48 @@ public class RobotContainer {
     climberSubsystem = new ClimberSubsystem();
     limelight = new Limelight();
 
-    // JoystickButton button8 = new JoystickButton(driverStationJoy, 8);
-    // JoystickButton button11 = new JoystickButton(driverStationJoy, 11);
-    // toggleClimb = new DoubleButton( button8, button11);
-
 
     //enable this to drive!!
     drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(getLeftY(), getRightY()), drivetrainSubsystem));
+////
+//    shooterSubsystem.setDefaultCommand(new RunCommand(() -> shooterSubsystem.moveServo(getLeftY() ), shooterSubsystem));
 
 //    shooterSubsystem.setDefaultCommand(
-//        new RunCommand(() -> shooterSubsystem.setServo(getLeftY() ), shooterSubsystem));
+//        new RunCommand(() -> shooterSubsystem.setHoodAngle(getLeftThrottle() * 180), shooterSubsystem));
     configureButtonBindings();
   }
 
   private void configureButtonBindings() {
 
-    setJoystickButtonWhileHeld(driverStationJoy, 1, new ParallelCommandGroup(new IntakeOutCommand(intakeSubsystem),
-            new MoveDownNeckCommand(neckSubsystem), new HopperOutCommand(hopperSubsystem)));
-    setJoystickButtonWhileHeld(driverStationJoy, 6, new ParallelCommandGroup(new IntakeInCommand(intakeSubsystem),
-            new MoveUpNeckCommand(neckSubsystem), new HopperInCommand(hopperSubsystem)));
+    //Runs all in, but Shooter
+    setJoystickButtonWhileHeld(driverStationJoy, 1, new ParallelCommandGroup(
+            new IntakeOutCommand(intakeSubsystem),
+            new MoveDownNeckCommand(neckSubsystem),
+            new HopperOutCommand(hopperSubsystem)));
+    //Toggles Flywheel
     setJoystickButtonWhenPressed(driverStationJoy, 2, new ToggleShooterCommand(shooterSubsystem));
     setJoystickButtonWhenPressed(driverStationJoy, 7, new ToggleIntakeCommand(intakeSubsystem));
     setJoystickButtonWhileHeld(driverStationJoy, 3, new SetHoodAngleCommand(shooterSubsystem, 90));
     setJoystickButtonWhileHeld(driverStationJoy, 8, new SetHoodAngleCommand(shooterSubsystem, 0));
+    //Stops Climber
     setJoystickButtonWhenPressed(driverStationJoy, 4, new RunCommand(() -> climberSubsystem.stopClimb(), climberSubsystem));
     setJoystickButtonWhileHeld(driverStationJoy, 9, new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, intakeSubsystem));
+    //Climber Up
     setJoystickButtonWhileHeld(driverStationJoy, 5, new ClimbUpCommand(climberSubsystem));
+    //Runs all out, but Shooter
+    setJoystickButtonWhileHeld(driverStationJoy, 6, new ParallelCommandGroup(
+            new IntakeInCommand(intakeSubsystem),
+            new MoveUpNeckCommand(neckSubsystem),
+            new HopperInCommand(hopperSubsystem)));
+    //Intake Up and Down
+    setJoystickButtonWhenPressed(driverStationJoy, 7, new ToggleIntakeCommand(intakeSubsystem));
+    //Sets Hood
+    setJoystickButtonWhenPressed(driverStationJoy, 8, new SetHoodAngleCommand(shooterSubsystem));
+    setJoystickButtonWhileHeld(driverStationJoy, 11, new RunCommand(() -> shooterSubsystem.setHoodAngle(0), shooterSubsystem));
+    setJoystickButtonWhenPressed(driverStationJoy, 12, new RunCommand(() -> shooterSubsystem.setHoodAngle(90), shooterSubsystem));
+    //All but Intake
+    setJoystickButtonWhenPressed(driverStationJoy, 9, new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem));
+    //Climbs Down
     setJoystickButtonWhileHeld(driverStationJoy, 10, new ClimbDownCommand(climberSubsystem));
     //shifts
     setJoystickButtonWhenPressed(driverStationJoy, 11, new ToggleShiftingCommand(shiftGearsSubsystem));
