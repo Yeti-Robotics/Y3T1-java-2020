@@ -9,16 +9,14 @@ import frc.robot.commands.neck.MoveUpNeckCommand;
 import frc.robot.commands.shooting.SetHoodAngleCommand;
 import frc.robot.commands.shooting.StartSpinCommand;
 import frc.robot.commands.shooting.StopSpinCommand;
-import frc.robot.subsystems.DrivetrainSubsystem;
-import frc.robot.subsystems.HopperSubsystem;
-import frc.robot.subsystems.NeckSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.*;
 
 public class ShootThenBackCommandGroup extends SequentialCommandGroup {
-    public ShootThenBackCommandGroup(ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem, NeckSubsystem neckSubsystem, DrivetrainSubsystem drivetrainSubsystem) {
+    public ShootThenBackCommandGroup(ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem, NeckSubsystem neckSubsystem, DrivetrainSubsystem drivetrainSubsystem, IntakeSubsystem intakeSubsystem) {
         super();
         addCommands(
-                new ShootCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, drivetrainSubsystem),
+                new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem,  intakeSubsystem).withTimeout(5),
+                new StopSpinCommand(shooterSubsystem),
                 new DriveForDistanceCommand(drivetrainSubsystem, 18, -.5,  -.5 )
         );
     }

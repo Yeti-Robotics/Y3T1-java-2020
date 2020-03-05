@@ -28,8 +28,7 @@ public class ShootNoTurnCommandGroup extends SequentialCommandGroup {
                         new HopperInCommand(hopperSubsystem),
                         new MoveUpNeckCommand(neckSubsystem),
                         new IntakeInCommand(intakeSubsystem)
-                ).withTimeout(6),
-                new StopSpinCommand(shooterSubsystem)
+                )
         );
     }
 }

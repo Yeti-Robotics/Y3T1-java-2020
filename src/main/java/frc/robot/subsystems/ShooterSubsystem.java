@@ -31,6 +31,11 @@ public class ShooterSubsystem extends SubsystemBase {
         hoodServo2.set(1);
         shooterLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
         shooterRightTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+
+        hoodServo1.setBounds(2.0,1.52,1.5,1.48,1.0);
+        hoodServo2.setBounds(2.0,1.52,1.5,1.48,1.0);
+        hoodServo1.enableDeadbandElimination(true);
+        hoodServo2.enableDeadbandElimination(true);
 //        hoodServo1.set(0);
 //        hoodServo1.setAngle(0);
 //        hoodServo2.set(1);
@@ -91,12 +96,13 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void setHoodAngle(double angle) {
 //        angle *= Constants.SERVO_RATIO;
-        hoodServo1.setAngle(angle);
-        hoodServo2.setAngle(180 - angle);
+        hoodServo1.setSpeed(-angle);
+        hoodServo2.setSpeed( angle);
     }
 
     public double getHoodAngle() {
-        return hoodServo1.getAngle() * Constants.SERVO_GEAR_RATIO; 
+//        return hoodServo1.getAngle() * Constants.SERVO_GEAR_RATIO;
+        return hoodServo1.getAngle();
     }
 
     public static ShooterStatus getShooterStatus(){

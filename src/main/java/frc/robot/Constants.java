@@ -51,7 +51,7 @@ public final class Constants {
     public static final int UPPER_BEAM_BREAK = 0;
     public static final int LOWER_BEAM_BREAK = 1;
 
-    public static final double NECK_UP_SPEED = 0.5;
+    public static final double NECK_UP_SPEED = 1;
     public static final double NECK_DOWN_SPEED = -0.5;
 
     //shooter constants
@@ -62,8 +62,8 @@ public final class Constants {
     public static final double SERVO_GEAR_RATIO = 32.0 / 96;
     public static final double SERVO_RATIO = 0.72;
 
-    public static final double SHOOT_1_SPEED = 0.9;
-    public static final double SHOOT_2_SPEED = 0.9;
+    public static final double SHOOT_1_SPEED = .9;
+    public static final double SHOOT_2_SPEED = .9;
     public static final double REVERSE_SHOOT_1_SPEED = -0.5;
     public static final double REVERSE_SHOOT_2_SPEED = -0.5;
 

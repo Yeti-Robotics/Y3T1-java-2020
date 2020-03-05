@@ -26,8 +26,7 @@ public class ShootCommandGroup extends SequentialCommandGroup {
                 new ParallelCommandGroup(
                         new HopperInCommand(hopperSubsystem),
                         new MoveUpNeckCommand(neckSubsystem)
-                ).withTimeout(6),
-                new StopSpinCommand(shooterSubsystem)
+                )
         );
     }
 }
