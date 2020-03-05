@@ -105,11 +105,11 @@ public class RobotContainer {
     //Intake Up and Down
     setJoystickButtonWhenPressed(driverStationJoy, 7, new ToggleIntakeCommand(intakeSubsystem));
     //Sets Hood
-    setJoystickButtonWhenPressed(driverStationJoy, 8, new SetHoodAngleCommand(shooterSubsystem));
+    setJoystickButtonWhenPressed(driverStationJoy, 8, new SetHoodAngleCommand(shooterSubsystem, 45));
     setJoystickButtonWhileHeld(driverStationJoy, 11, new RunCommand(() -> shooterSubsystem.setHoodAngle(0), shooterSubsystem));
     setJoystickButtonWhenPressed(driverStationJoy, 12, new RunCommand(() -> shooterSubsystem.setHoodAngle(90), shooterSubsystem));
     //All but Intake
-    setJoystickButtonWhenPressed(driverStationJoy, 9, new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem));
+    setJoystickButtonWhenPressed(driverStationJoy, 9, new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, intakeSubsystem));
     //Climbs Down
     setJoystickButtonWhileHeld(driverStationJoy, 10, new ClimbDownCommand(climberSubsystem));
     //shifts

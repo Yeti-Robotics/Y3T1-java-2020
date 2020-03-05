@@ -40,6 +40,8 @@ public class Robot extends TimedRobot {
 
   private DrivetrainSubsystem drivetrainSubsystem;
 
+  private IntakeSubsystem intakeSubsystem;
+
 //  private DrivetrainSubsystem drivetrainSubsystem;
 //  private NeckSubsystem neckSubsystem;
 //  private ShooterSubsystem shooterSubsystem;
@@ -64,6 +66,7 @@ public class Robot extends TimedRobot {
     
     robotContainer = new RobotContainer();
     drivetrainSubsystem = new DrivetrainSubsystem();
+    intakeSubsystem = new IntakeSubsystem();
 //
 //    drivetrainSubsystem = new DrivetrainSubsystem();
 //    neckSubsystem = new NeckSubsystem();
@@ -140,7 +143,7 @@ public class Robot extends TimedRobot {
 //m_autonomousCommand =  shootAutoCommandGroup;
     // schedule the autonomous command (example)
 
-    m_autonomousCommand = new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem);
+    m_autonomousCommand = new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, intakeSubsystem);
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
