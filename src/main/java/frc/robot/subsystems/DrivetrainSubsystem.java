@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -31,8 +32,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         // leftFalcon2.follow(leftFalcon1);
         // rightFalcon2.follow(rightFalcon1);
-
-
+        leftFalcon1.setNeutralMode(NeutralMode.Brake);
+        leftFalcon2.setNeutralMode(NeutralMode.Brake);
+        rightFalcon1.setNeutralMode(NeutralMode.Brake);
+        rightFalcon2.setNeutralMode(NeutralMode.Brake);
     }
 
 

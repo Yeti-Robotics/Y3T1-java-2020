@@ -3,17 +3,14 @@ package frc.robot.autoRoutines;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.drivetrain.DriveForDistanceCommand;
-import frc.robot.subsystems.DrivetrainSubsystem;
-import frc.robot.subsystems.HopperSubsystem;
-import frc.robot.subsystems.NeckSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.*;
 
 public class ShootThenForwardCommandGroup extends SequentialCommandGroup {
-    public ShootThenForwardCommandGroup(ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem, NeckSubsystem neckSubsystem, DrivetrainSubsystem drivetrainSubsystem) {
+    public ShootThenForwardCommandGroup(ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem, NeckSubsystem neckSubsystem, DrivetrainSubsystem drivetrainSubsystem, IntakeSubsystem intakeSubsystem) {
        super();
         addCommands(
-                new ShootCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, drivetrainSubsystem),
-                new DriveForDistanceCommand(drivetrainSubsystem, 18, .5,  .5 )
+                new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, intakeSubsystem),
+                new DriveForDistanceCommand(drivetrainSubsystem, 30, .5,  .5 )
         );
     }
 }

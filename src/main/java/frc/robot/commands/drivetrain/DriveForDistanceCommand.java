@@ -30,11 +30,11 @@ public class DriveForDistanceCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return distanceGoal == this.drivetrainSubsystem.getAverageEncoder();
+        return distanceGoal <= this.drivetrainSubsystem.getAverageEncoder();
     }
 
     @Override
     public void end(boolean interrupted) {
-
+        drivetrainSubsystem.stopDrive();
     }
 }

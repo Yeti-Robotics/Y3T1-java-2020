@@ -27,8 +27,16 @@ public class ShooterSubsystem extends SubsystemBase {
         shooterRightTalon = new TalonSRX(Constants.SHOOTER_RIGHT_TALON);
         hoodServo1 = new Servo(Constants.SHOOTER_SERVO_1);
         hoodServo2 = new Servo(Constants.SHOOTER_SERVO_2);
+        hoodServo1.set(0);
+        hoodServo2.set(1);
         shooterLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
         shooterRightTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+//        hoodServo1.set(0);
+//        hoodServo1.setAngle(0);
+//        hoodServo2.set(1);
+//        hoodServo2.setAngle(180);
+//        hoodServo1.setBounds(500,1167,1750,2333,2500);
+//        hoodServo2.setBounds(2500,1833,1250,667,500);
 
 //        shooterLeftTalon.follow(shooterRightTalon);
     }
@@ -72,9 +80,9 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public void setServo(double pos) {
-        pos *= Constants.SERVO_RATIO;
-        hoodServo1.setAngle(pos);
-//        hoodServo2.setAngle(180 - pos);
+//        pos *= Constants.SERVO_RATIO;
+        hoodServo1.setSpeed(pos);
+        hoodServo2.setSpeed(pos);
     }
     
     public double getHoodPosition() {
@@ -82,7 +90,7 @@ public class ShooterSubsystem extends SubsystemBase {
         }
 
     public void setHoodAngle(double angle) {
-        angle *= Constants.SERVO_RATIO;
+//        angle *= Constants.SERVO_RATIO;
         hoodServo1.setAngle(angle);
         hoodServo2.setAngle(180 - angle);
     }

@@ -24,6 +24,7 @@ import frc.robot.commands.shifting.ToggleShiftingCommand;
 import frc.robot.commands.neck.MoveUpNeckCommand;
 import frc.robot.commands.hopper.HopperInCommand;
 import frc.robot.commands.intake.IntakeInCommand;
+import frc.robot.commands.shooting.SetHoodAngleCommand;
 import frc.robot.commands.shooting.StartSpinCommand;
 import frc.robot.commands.shooting.ToggleShooterCommand;
 import frc.robot.subsystems.*;
@@ -43,11 +44,11 @@ public class RobotContainer {
   // public final Joystick secondaryJoy;
   // private WheelOfFortuneSubsystem wheelOfFortuneSubsystem;
   public final Joystick driverStationJoy;
-  private DrivetrainSubsystem drivetrainSubsystem;
-  private IntakeSubsystem intakeSubsystem;
-  private NeckSubsystem neckSubsystem;
-  private ShooterSubsystem shooterSubsystem;
-  private HopperSubsystem hopperSubsystem;
+  public DrivetrainSubsystem drivetrainSubsystem;
+  public IntakeSubsystem intakeSubsystem;
+  public NeckSubsystem neckSubsystem;
+  public ShooterSubsystem shooterSubsystem;
+  public HopperSubsystem hopperSubsystem;
   private ClimberSubsystem climberSubsystem;
   private ShiftGearsSubsystem shiftGearsSubsystem;
   // private DoubleButton toggleClimb;
@@ -66,9 +67,9 @@ public class RobotContainer {
     // JoystickButton button8 = new JoystickButton(driverStationJoy, 8);
     // JoystickButton button11 = new JoystickButton(driverStationJoy, 11);
     // toggleClimb = new DoubleButton( button8, button11);
-    drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(getLeftY(), getRightY()), drivetrainSubsystem));
-    shooterSubsystem.setDefaultCommand(
-        new RunCommand(() -> shooterSubsystem.setHoodAngle(getLeftThrottle() * 180), shooterSubsystem));
+//    drivetrainSubsystem.setDefaultCommand(new RunCommand(() -> drivetrainSubsystem.drive(getLeftY(), getRightY()), drivetrainSubsystem));
+//    shooterSubsystem.setDefaultCommand(
+//        new RunCommand(() -> shooterSubsystem.setServo(getLeftY() ), shooterSubsystem));
     configureButtonBindings();
   }
 
@@ -84,10 +85,13 @@ public class RobotContainer {
     setJoystickButtonWhileHeld(driverStationJoy, 3, new RunCommand(()->climberSubsystem.toggleClimbUp(getRightY()),climberSubsystem));
     setJoystickButtonWhenPressed(driverStationJoy, 4, new RunCommand(() -> climberSubsystem.stopClimb(), climberSubsystem));
 //    setJoystickButtonWhileHeld(driverStationJoy, 9, new ParallelCommandGroup(new ));
+
     setJoystickButtonWhileHeld(driverStationJoy, 5, new ClimbUpCommand(climberSubsystem));
     setJoystickButtonWhileHeld(driverStationJoy, 10, new ClimbDownCommand(climberSubsystem));
     setJoystickButtonWhenPressed(driverStationJoy, 11, new ToggleShiftingCommand(shiftGearsSubsystem));
     setJoystickButtonWhenPressed(driverStationJoy, 12, new TurnToTargetCommand(drivetrainSubsystem));
+
+    setJoystickButtonWhenPressed(driverStationJoy, 9, new SetHoodAngleCommand(shooterSubsystem));
 
 
 //    setJoystickButtonWhenPressed(driverStationJoy, 9,

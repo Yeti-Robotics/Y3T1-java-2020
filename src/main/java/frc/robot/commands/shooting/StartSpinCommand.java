@@ -27,9 +27,11 @@ public class StartSpinCommand extends CommandBase {
     @Override
     public boolean isFinished() {
         // TODO: Make this return true when this Command no longer needs to run execute()
-        return Math.abs(shooterSubsystem.getSpeed()) == Constants.SHOOT_1_SPEED;
+        return Math.abs(shooterSubsystem.getSpeed()) >= Constants.SHOOT_1_SPEED;
     }
 
     @Override
-    public void end(boolean interrupted) { }
+    public void end(boolean interrupted) {
+
+    }
 }

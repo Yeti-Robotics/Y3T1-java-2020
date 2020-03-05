@@ -20,6 +20,9 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.robot.autoRoutines.ShootNoTurnCommandGroup;
+import frc.robot.autoRoutines.ShootThenForwardCommandGroup;
+import frc.robot.commands.drivetrain.DriveForDistanceCommand;
+import frc.robot.commands.shooting.StartSpinCommand;
 import frc.robot.subsystems.*;
 import frc.robot.utils.Limelight;
 
@@ -31,14 +34,6 @@ import frc.robot.utils.Limelight;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
-  private ShooterSubsystem shooterSubsystem;
-
-  private HopperSubsystem hopperSubsystem;
-
-  private NeckSubsystem neckSubsystem;
-
-  private DrivetrainSubsystem drivetrainSubsystem;
 
 //  private DrivetrainSubsystem drivetrainSubsystem;
 //  private NeckSubsystem neckSubsystem;
@@ -63,6 +58,7 @@ public class Robot extends TimedRobot {
 
     
     robotContainer = new RobotContainer();
+
 //
 //    drivetrainSubsystem = new DrivetrainSubsystem();
 //    neckSubsystem = new NeckSubsystem();
@@ -139,9 +135,13 @@ public class Robot extends TimedRobot {
 //m_autonomousCommand =  shootAutoCommandGroup;
     // schedule the autonomous command (example)
 
-    m_autonomousCommand = new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem);
+    m_autonomousCommand = new ShootThenForwardCommandGroup(robotContainer.shooterSubsystem, robotContainer.hopperSubsystem, robotContainer.neckSubsystem, robotContainer.drivetrainSubsystem, robotContainer.intakeSubsystem);
+//    m_autonomousCommand = new StartSpinCommand(shooterSubsystem);
+//    m_autonomousCommand = new DriveForDistanceCommand(robotContainer.drivetrainSubsystem, 15, 0.5, 0.5);
 
     if (m_autonomousCommand != null) {
+      m_autonomousCommand.initialize();
+      m_autonomousCommand.execute();
       m_autonomousCommand.schedule();
     }
   }
