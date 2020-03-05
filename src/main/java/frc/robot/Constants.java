@@ -24,9 +24,9 @@ public final class Constants {
     public static final int RIGHT_FALCON_1 = 1;
     public static final int RIGHT_FALCON_2 = 7;
 
-    public static final double kTurnP = .06;
+    public static final double kTurnP = 1;
     public static final double kTurnI = 0;
-    public static final double kTurnD = .005;
+    public static final double kTurnD = 0;
 
     public static final double DISTANCE_PER_PULSE = (6 * Math.PI) / 4096; //inches
 
@@ -71,7 +71,7 @@ public final class Constants {
     public static final int CLIMBER_TALON_1 = 4; //left
     public static final int CLIMBER_TALON_2 = 8; //right
 
-    public static final double CLIMBER_SPEED = 0.6;
+    public static final double CLIMBER_SPEED = 0.9;
 
     public static final int CLIMBER_CONT_CURRENT_LIMIT = 15;
     public static final int CLIMBER_PEAK_CURRENT_LIMIT = 25;

@@ -90,37 +90,18 @@ public class RobotContainer {
             new MoveUpNeckCommand(neckSubsystem), new HopperInCommand(hopperSubsystem)));
     setJoystickButtonWhenPressed(driverStationJoy, 2, new ToggleShooterCommand(shooterSubsystem));
     setJoystickButtonWhenPressed(driverStationJoy, 7, new ToggleIntakeCommand(intakeSubsystem));
-//    setJoystickButtonWhenPressed(driverStationJoy, 8, new ShootCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, drivetrainSubsystem));
-//    setJoystickButtonWhileHeld(driverStationJoy, 3, new RunCommand(()->climberSubsystem.toggleClimbUp(getRightY()),climberSubsystem));
-//    setJoystickButtonWhenPressed(driverStationJoy, 3, new TurnNoPIDCommand(drivetrainSubsystem, limelight));
-
-    //this button can be replaced with limelight align in the future
+    setJoystickButtonWhileHeld(driverStationJoy, 3, new SetHoodAngleCommand(shooterSubsystem, 90));
+    setJoystickButtonWhileHeld(driverStationJoy, 8, new SetHoodAngleCommand(shooterSubsystem, 0));
     setJoystickButtonWhenPressed(driverStationJoy, 4, new RunCommand(() -> climberSubsystem.stopClimb(), climberSubsystem));
     setJoystickButtonWhileHeld(driverStationJoy, 9, new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, intakeSubsystem));
-
-    setJoystickButtonWhileHeld(driverStationJoy, 8, new SetHoodAngleCommand(shooterSubsystem, 1));
-    setJoystickButtonWhileHeld(driverStationJoy, 3, new SetHoodAngleCommand(shooterSubsystem, -1));
-
-//    setJoystickButtonWhenPressed(driverStationJoy, 8, new SetHoodAngleCommand(shooterSubsystem));
-
     setJoystickButtonWhileHeld(driverStationJoy, 5, new ClimbUpCommand(climberSubsystem));
     setJoystickButtonWhileHeld(driverStationJoy, 10, new ClimbDownCommand(climberSubsystem));
+    //shifts
     setJoystickButtonWhenPressed(driverStationJoy, 11, new ToggleShiftingCommand(shiftGearsSubsystem));
+    //this button can be replaced with limelight align in the future
+//    setJoystickButtonWhenPressed(driverStationJoy, 12, new TurnNoPIDCommand(drivetrainSubsystem, limelight));
     setJoystickButtonWhenPressed(driverStationJoy, 12, new TurnToTargetCommand(drivetrainSubsystem));
-
-//    setJoystickButtonWhenPressed(driverStationJoy, 9, new SetHoodAngleCommand(shooterSubsystem));
-
-
-//    setJoystickButtonWhenPressed(driverStationJoy, 9,
-//        new ShootCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, drivetrainSubsystem));
-//    setJoystickButtonWhenPressed(driverStationJoy, 7,
-//        new ShootCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, drivetrainSubsystem));
-//    setJoystickButtonWhileHeld(driverStationJoy, 8,
-//        new RunCommand(() -> drivetrainSubsystem.drive(0, 0), drivetrainSubsystem));
-//    setJoystickButtonWhileHeld(driverStationJoy, 12,
-//        new ParallelCommandGroup(new RunCommand(() -> drivetrainSubsystem.drive(0, 0), drivetrainSubsystem),
-//            new RunCommand(() -> climberSubsystem.toggleClimbUp(getRightY()), climberSubsystem)));
-    // setJoystickButtonWhileHeld(driverStationJoy, );
+//
   }
 
   public double getLeftY() {

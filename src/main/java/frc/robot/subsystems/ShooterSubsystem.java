@@ -96,8 +96,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
     public void setHoodAngle(double angle) {
 //        angle *= Constants.SERVO_RATIO;
-        hoodServo1.setSpeed(-angle);
-        hoodServo2.setSpeed( angle);
+//        hoodServo1.setSpeed(-angle);
+//        hoodServo2.setSpeed( angle);
+        hoodServo1.setAngle(angle);
+        hoodServo2.setAngle(180-angle);
     }
 
     public double getHoodAngle() {

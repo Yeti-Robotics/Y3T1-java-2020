@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Constants;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.utils.Limelight;
+import org.opencv.core.Mat;
 
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
@@ -50,36 +51,44 @@ public class TurnToTargetCommand extends PIDCommand {
         addRequirements(drivetrainSubsystem);
     }
 
-//    @Override
-//    public void initialize() {
-//
-//    }
-//
-//    @Override
-//    public void execute() {
-//        if(Limelight.getTx()<0){
-//            drivetrainSubsystem.drive(-0.4,0.4);
-//            System.out.println("turning left");
-//        }else if(Limelight.getTx()>0){
-//            drivetrainSubsystem.drive(0.4,-0.4);
-//            System.out.println("turning right");
-//        }
-//    }
+    @Override
+    public void initialize() {
+
+    }
+
+    @Override
+    public void execute() {
+        System.out.println("command accessed");
+        if(Limelight.getTx()<0){
+            drivetrainSubsystem.drive(-0.4,0.4);
+            System.out.println("turning left");
+        }else if(Limelight.getTx()>0){
+            drivetrainSubsystem.drive(0.4,-0.4);
+            System.out.println("turning right");
+        }
+    }
 
     @Override
     public boolean isFinished() {
+        if(Math.abs(Limelight.getTx()) < 0.5) {
+            return true;
+        } else {
+            return false;
+        }
         //return Math.abs(Limelight.getTx()) <= 2;
-        if (getController().atSetpoint()) {
-            ticks++;
-        }
-        else {
-            ticks = 0;
-        }
-        return ticks > 20;
+//        if (getController().atSetpoint()) {
+//            ticks++;
+//        }
+//        else {
+//            ticks = 0;
+//        }
+//        System.out.println("doop in finished :)");
+//        return ticks > 20;
     }
 
     @Override
     public void end(boolean interrupted) {
+        System.out.println("ended sir ^^");
         drivetrainSubsystem.drive(0,0);
 
     }
