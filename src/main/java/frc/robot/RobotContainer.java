@@ -11,24 +11,24 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autoRoutines.ShootCommandGroup;
 import frc.robot.autoRoutines.ShootWithTurnCommandGroup;
 import frc.robot.commands.climbing.ClimbDownCommand;
 import frc.robot.commands.climbing.ClimbUpCommand;
 import frc.robot.commands.drivetrain.StopDriveCommand;
+import frc.robot.commands.drivetrain.TurnNoPIDCommand;
 import frc.robot.commands.hopper.HopperOutCommand;
 import frc.robot.commands.hopper.StopFunnelCommand;
-import frc.robot.commands.intake.IntakeOutCommand;
-import frc.robot.commands.intake.StopRollCommand;
-import frc.robot.commands.intake.ToggleIntakeCommand;
+import frc.robot.commands.intake.*;
 import frc.robot.commands.neck.MoveDownNeckCommand;
 import frc.robot.commands.neck.StopNeckCommand;
 import frc.robot.commands.shifting.ToggleShiftingCommand;
 import frc.robot.commands.neck.MoveUpNeckCommand;
 import frc.robot.commands.hopper.HopperInCommand;
-import frc.robot.commands.intake.IntakeInCommand;
 import frc.robot.commands.shooting.SetHoodAngleCommand;
+import frc.robot.commands.shooting.StartSpinCommand;
 import frc.robot.commands.shooting.StopSpinCommand;
 import frc.robot.commands.shooting.ToggleShooterCommand;
 import frc.robot.subsystems.*;
@@ -84,54 +84,66 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
 
-    //Runs all in, but Shooter
+    //Runs all out, but Shooter
     setJoystickButtonWhileHeld(driverStationJoy, 1, new ParallelCommandGroup(
             new IntakeOutCommand(intakeSubsystem),
             new MoveDownNeckCommand(neckSubsystem),
             new HopperOutCommand(hopperSubsystem)));
 
-    //Toggles Flywheel
-    setJoystickButtonWhenPressed(driverStationJoy, 2, new ToggleShooterCommand(shooterSubsystem));
+    //Intake, Hopper, Tower, Shooter
+    setJoystickButtonWhileHeld(driverStationJoy, 2, new ParallelCommandGroup(
+            new IntakeInCommand(intakeSubsystem),
+            new HopperInCommand(hopperSubsystem),
+            new MoveUpNeckCommand(neckSubsystem),
+            new StartSpinCommand(shooterSubsystem)
+    ));
 
-    //Hood angle that doesn't work
-//        setJoystickButtonWhileHeld(driverStationJoy, 3, new SetHoodAngleCommand(shooterSubsystem, 90));
+    //Climbs Down
+    setJoystickButtonWhileHeld(driverStationJoy, 3, new ClimbDownCommand(climberSubsystem));
+
+    //Toggles Flywheel
+    setJoystickButtonWhenPressed(driverStationJoy, 4, new ToggleShooterCommand(shooterSubsystem));
 
     //Kill Switch - needs to be tested!
-        setJoystickButtonWhenPressed(driverStationJoy, 4, new ParallelCommandGroup(
+        setJoystickButtonWhenPressed(driverStationJoy, 5, new ParallelCommandGroup(
                 new StopSpinCommand(shooterSubsystem),
-                new StopDriveCommand(drivetrainSubsystem),
                 new StopFunnelCommand(hopperSubsystem),
                 new StopRollCommand(intakeSubsystem),
                 new StopNeckCommand(neckSubsystem)));
 
-    //Climber Up
-    setJoystickButtonWhileHeld(driverStationJoy, 5, new ClimbUpCommand(climberSubsystem));
-
-    //Runs all out, but Shooter
+    //Runs intake and hopper
     setJoystickButtonWhileHeld(driverStationJoy, 6, new ParallelCommandGroup(
             new IntakeInCommand(intakeSubsystem),
-            new MoveUpNeckCommand(neckSubsystem),
             new HopperInCommand(hopperSubsystem)));
+
+    //Intake, Hopper, and Tower
+    setJoystickButtonWhileHeld(driverStationJoy, 7, new ParallelCommandGroup(
+            new IntakeInCommand(intakeSubsystem),
+            new HopperInCommand(hopperSubsystem),
+            new MoveUpNeckCommand(neckSubsystem)
+    ));
+
+    //Climber Up
+    setJoystickButtonWhileHeld(driverStationJoy, 8, new ClimbUpCommand(climberSubsystem));
 
     //Intake Pistons
-    setJoystickButtonWhenPressed(driverStationJoy, 7, new ToggleIntakeCommand(intakeSubsystem));
+    setJoystickButtonWhenPressed(driverStationJoy, 9, new ToggleIntakeCommand(intakeSubsystem));
 
-    //Intake and Hopper
-    setJoystickButtonWhileHeld(driverStationJoy, 8, new ParallelCommandGroup(
-            new IntakeInCommand(intakeSubsystem),
-            new HopperInCommand(hopperSubsystem)));
+    //HP - intake down, intake backwards, hopper on
+    setJoystickButtonWhileHeld(driverStationJoy, 10, new SequentialCommandGroup(
+            new ExtendIntakeCommand(intakeSubsystem),
+            new ParallelCommandGroup(
+                    new IntakeInCommand(intakeSubsystem),
+                    new HopperInCommand(hopperSubsystem)
+            )
+    ));
 
-    //Spins then shoots
-    setJoystickButtonWhileHeld(driverStationJoy, 9, new ShootCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem,  intakeSubsystem));
-
-    //Climbs Down
-    setJoystickButtonWhileHeld(driverStationJoy, 10, new ClimbDownCommand(climberSubsystem));
 
     //Shift Gears
     setJoystickButtonWhenPressed(driverStationJoy, 11, new ToggleShiftingCommand(shiftGearsSubsystem));
 
-    //Turn No PID - needs to be tested!
-//    setJoystickButtonWhenPressed(driverStationJoy, 12, new TurnNoPIDCommand(drivetrainSubsystem, limelight));
+    //Turn No PID
+    setJoystickButtonWhenPressed(driverStationJoy, 12, new TurnNoPIDCommand(drivetrainSubsystem, limelight));
 
   }
 
@@ -187,4 +199,7 @@ public class RobotContainer {
   // DoubleButton doubleButton = new DoubleButton(ButtonOne, ButtonTwo);
   // doubleButton.whileHeld(command);
   // }
+
+  //Hood angle that doesn't work
+//        setJoystickButtonWhileHeld(driverStationJoy, 3, new SetHoodAngleCommand(shooterSubsystem, 90));
 }
