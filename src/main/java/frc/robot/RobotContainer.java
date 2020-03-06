@@ -16,15 +16,20 @@ import frc.robot.autoRoutines.ShootCommandGroup;
 import frc.robot.autoRoutines.ShootWithTurnCommandGroup;
 import frc.robot.commands.climbing.ClimbDownCommand;
 import frc.robot.commands.climbing.ClimbUpCommand;
+import frc.robot.commands.drivetrain.StopDriveCommand;
 import frc.robot.commands.hopper.HopperOutCommand;
+import frc.robot.commands.hopper.StopFunnelCommand;
 import frc.robot.commands.intake.IntakeOutCommand;
+import frc.robot.commands.intake.StopRollCommand;
 import frc.robot.commands.intake.ToggleIntakeCommand;
 import frc.robot.commands.neck.MoveDownNeckCommand;
+import frc.robot.commands.neck.StopNeckCommand;
 import frc.robot.commands.shifting.ToggleShiftingCommand;
 import frc.robot.commands.neck.MoveUpNeckCommand;
 import frc.robot.commands.hopper.HopperInCommand;
 import frc.robot.commands.intake.IntakeInCommand;
 import frc.robot.commands.shooting.SetHoodAngleCommand;
+import frc.robot.commands.shooting.StopSpinCommand;
 import frc.robot.commands.shooting.ToggleShooterCommand;
 import frc.robot.subsystems.*;
 import frc.robot.utils.Limelight;
@@ -91,8 +96,13 @@ public class RobotContainer {
     //Hood angle that doesn't work
 //        setJoystickButtonWhileHeld(driverStationJoy, 3, new SetHoodAngleCommand(shooterSubsystem, 90));
 
-    //Kill Switch - needs to be finished + tested!
-    //    setJoystickButtonWhenPressed(driverStationJoy, 4, new ParallelCommandGroup(new StopSpinCommand(shooterSubsystem), drivetrainSubsystem.stopDrive(), hopperSubsystem.funnelStop(), intakeSubsystem.stopRoll(),);
+    //Kill Switch - needs to be tested!
+        setJoystickButtonWhenPressed(driverStationJoy, 4, new ParallelCommandGroup(
+                new StopSpinCommand(shooterSubsystem),
+                new StopDriveCommand(drivetrainSubsystem),
+                new StopFunnelCommand(hopperSubsystem),
+                new StopRollCommand(intakeSubsystem),
+                new StopNeckCommand(neckSubsystem)));
 
     //Climber Up
     setJoystickButtonWhileHeld(driverStationJoy, 5, new ClimbUpCommand(climberSubsystem));
@@ -107,11 +117,12 @@ public class RobotContainer {
     setJoystickButtonWhenPressed(driverStationJoy, 7, new ToggleIntakeCommand(intakeSubsystem));
 
     //Intake and Hopper
-    setJoystickButtonWhileHeld(driverStationJoy, 8, new ParallelCommandGroup(new IntakeInCommand(intakeSubsystem), new HopperInCommand(hopperSubsystem)));
-
+    setJoystickButtonWhileHeld(driverStationJoy, 8, new ParallelCommandGroup(
+            new IntakeInCommand(intakeSubsystem),
+            new HopperInCommand(hopperSubsystem)));
 
     //Spins then shoots
-    setJoystickButtonWhileHeld(driverStationJoy, 9, new ShootCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem,  drivetrainSubsystem, intakeSubsystem));
+    setJoystickButtonWhileHeld(driverStationJoy, 9, new ShootCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem,  intakeSubsystem));
 
     //Climbs Down
     setJoystickButtonWhileHeld(driverStationJoy, 10, new ClimbDownCommand(climberSubsystem));
@@ -173,7 +184,6 @@ public class RobotContainer {
   // button2, Command command){
   // JoystickButton ButtonOne = new JoystickButton(joystick, button1);
   // JoystickButton ButtonTwo = new JoystickButton(joystick, button2);
-  //
   // DoubleButton doubleButton = new DoubleButton(ButtonOne, ButtonTwo);
   // doubleButton.whileHeld(command);
   // }

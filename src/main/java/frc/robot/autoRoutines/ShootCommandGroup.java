@@ -10,14 +10,10 @@ import frc.robot.commands.shooting.StartSpinCommand;
 import frc.robot.subsystems.*;
 
 public class ShootCommandGroup extends SequentialCommandGroup {
-    public ShootCommandGroup(ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem, NeckSubsystem neckSubsystem, DrivetrainSubsystem drivetrainSubsystem, IntakeSubsystem intakeSubsytem) {
+    public ShootCommandGroup(ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem, NeckSubsystem neckSubsystem, IntakeSubsystem intakeSubsytem) {
             super();
         addCommands(
                 new StartSpinCommand(shooterSubsystem).withTimeout(2),
-//                new ParallelCommandGroup(
-//                        new TurnToTargetCommand(drivetrainSubsystem),
-//                        new SetHoodAngleCommand(shooterSubsystem)
-//                ),
                 new ParallelCommandGroup(
                         new HopperInCommand(hopperSubsystem),
                         new MoveUpNeckCommand(neckSubsystem),
