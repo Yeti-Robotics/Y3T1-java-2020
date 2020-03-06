@@ -16,8 +16,8 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.utils.Limelight;
 
-public class ShootNoTurnCommandGroup extends SequentialCommandGroup {
-    public ShootNoTurnCommandGroup(ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem, NeckSubsystem neckSubsystem, IntakeSubsystem intakeSubsystem, DrivetrainSubsystem drivetrainSubsystem, Limelight limelight) {
+public class ShootWithTurnCommandGroup extends SequentialCommandGroup {
+    public ShootWithTurnCommandGroup(ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem, NeckSubsystem neckSubsystem, IntakeSubsystem intakeSubsystem, DrivetrainSubsystem drivetrainSubsystem, Limelight limelight) {
         super();
         addCommands(
                     new TurnNoPIDCommand(drivetrainSubsystem, limelight),

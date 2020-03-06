@@ -14,7 +14,7 @@ public class ForwardThenShootCommandGroup extends SequentialCommandGroup {
         addCommands(
                 new RetractIntakeCommand(intakeSubsystem),
                 new DriveForDistanceCommand(drivetrainSubsystem, 72, .5,  .5 ),
-                new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, intakeSubsystem, drivetrainSubsystem, limelight).withTimeout(5),
+                new ShootWithTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, intakeSubsystem, drivetrainSubsystem, limelight).withTimeout(5),
                 new StopSpinCommand(shooterSubsystem)
         );
     }

@@ -12,7 +12,7 @@ public class ShootThenForwardCommandGroup extends SequentialCommandGroup {
        super();
         addCommands(
 
-                new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem,  intakeSubsystem,drivetrainSubsystem,limelight).withTimeout(5),
+                new ShootWithTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem,  intakeSubsystem,drivetrainSubsystem,limelight).withTimeout(5),
                 new StopSpinCommand(shooterSubsystem),
                 new DriveForDistanceCommand(drivetrainSubsystem, 30, .5,  .5 )
         );
