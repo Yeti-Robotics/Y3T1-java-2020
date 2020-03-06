@@ -70,12 +70,8 @@ public class TurnToTargetCommand extends PIDCommand {
 
     @Override
     public boolean isFinished() {
-        if(Math.abs(Limelight.getTx()) < 0.5) {
-            return true;
-        } else {
-            return false;
-        }
-        //return Math.abs(Limelight.getTx()) <= 2;
+        System.out.println("done done done");
+        return Math.abs(Limelight.getTx()) <= 2;
 //        if (getController().atSetpoint()) {
 //            ticks++;
 //        }

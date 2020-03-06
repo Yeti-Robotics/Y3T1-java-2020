@@ -6,8 +6,8 @@ import frc.robot.commands.drivetrain.DriveForDistanceCommand;
 import frc.robot.commands.shooting.StopSpinCommand;
 import frc.robot.subsystems.*;
 
-public class FowardThenShootBackCommandGroup extends SequentialCommandGroup {
-    public FowardThenShootBackCommandGroup(ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem, NeckSubsystem neckSubsystem, DrivetrainSubsystem drivetrainSubsystem, IntakeSubsystem intakeSubsystem) {
+public class ForwardThenShootBackCommandGroup extends SequentialCommandGroup {
+    public ForwardThenShootBackCommandGroup(ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem, NeckSubsystem neckSubsystem, DrivetrainSubsystem drivetrainSubsystem, IntakeSubsystem intakeSubsystem) {
        super();
         addCommands(
                 new DriveForDistanceCommand(drivetrainSubsystem, 62, .5,  .5 ),

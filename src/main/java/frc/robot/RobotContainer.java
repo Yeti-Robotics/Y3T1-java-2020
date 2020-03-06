@@ -87,6 +87,10 @@ public class RobotContainer {
             new IntakeOutCommand(intakeSubsystem),
             new MoveDownNeckCommand(neckSubsystem),
             new HopperOutCommand(hopperSubsystem)));
+    setJoystickButtonWhileHeld(driverStationJoy, 6, new ParallelCommandGroup(
+            new IntakeInCommand(intakeSubsystem),
+            new MoveUpNeckCommand(neckSubsystem),
+            new HopperInCommand(hopperSubsystem)));
     //Toggles Flywheel
     setJoystickButtonWhenPressed(driverStationJoy, 2, new ToggleShooterCommand(shooterSubsystem));
     setJoystickButtonWhenPressed(driverStationJoy, 7, new ToggleIntakeCommand(intakeSubsystem));
@@ -97,19 +101,6 @@ public class RobotContainer {
     setJoystickButtonWhileHeld(driverStationJoy, 9, new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, intakeSubsystem));
     //Climber Up
     setJoystickButtonWhileHeld(driverStationJoy, 5, new ClimbUpCommand(climberSubsystem));
-    //Runs all out, but Shooter
-    setJoystickButtonWhileHeld(driverStationJoy, 6, new ParallelCommandGroup(
-            new IntakeInCommand(intakeSubsystem),
-            new MoveUpNeckCommand(neckSubsystem),
-            new HopperInCommand(hopperSubsystem)));
-    //Intake Up and Down
-    setJoystickButtonWhenPressed(driverStationJoy, 7, new ToggleIntakeCommand(intakeSubsystem));
-    //Sets Hood
-    setJoystickButtonWhenPressed(driverStationJoy, 8, new SetHoodAngleCommand(shooterSubsystem, 45));
-    setJoystickButtonWhileHeld(driverStationJoy, 11, new RunCommand(() -> shooterSubsystem.setHoodAngle(0), shooterSubsystem));
-    setJoystickButtonWhenPressed(driverStationJoy, 12, new RunCommand(() -> shooterSubsystem.setHoodAngle(90), shooterSubsystem));
-    //All but Intake
-    setJoystickButtonWhenPressed(driverStationJoy, 9, new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, intakeSubsystem));
     //Climbs Down
     setJoystickButtonWhileHeld(driverStationJoy, 10, new ClimbDownCommand(climberSubsystem));
     //shifts

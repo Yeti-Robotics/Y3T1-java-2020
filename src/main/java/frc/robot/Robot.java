@@ -12,14 +12,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
-import frc.robot.autoRoutines.ShootCommandGroup;
+import frc.robot.autoRoutines.ForwardThenShootCommandGroup;
 
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import frc.robot.autoRoutines.ShootNoTurnCommandGroup;
 import frc.robot.subsystems.*;
 import frc.robot.utils.Limelight;
 
@@ -65,8 +64,8 @@ public class Robot extends TimedRobot {
 
     
     robotContainer = new RobotContainer();
-    drivetrainSubsystem = new DrivetrainSubsystem();
-    intakeSubsystem = new IntakeSubsystem();
+//    drivetrainSubsystem = new DrivetrainSubsystem();
+//    intakeSubsystem = new IntakeSubsystem();
 //
 //    drivetrainSubsystem = new DrivetrainSubsystem();
 //    neckSubsystem = new NeckSubsystem();
@@ -143,7 +142,7 @@ public class Robot extends TimedRobot {
 //m_autonomousCommand =  shootAutoCommandGroup;
     // schedule the autonomous command (example)
 
-    m_autonomousCommand = new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, intakeSubsystem);
+    m_autonomousCommand = new ForwardThenShootCommandGroup(robotContainer.shooterSubsystem, robotContainer.hopperSubsystem, robotContainer.neckSubsystem, robotContainer.drivetrainSubsystem, robotContainer.intakeSubsystem);
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

@@ -28,7 +28,7 @@ public final class Constants {
     public static final double kTurnI = 0;
     public static final double kTurnD = 0;
 
-    public static final double DISTANCE_PER_PULSE = (6 * Math.PI) / 4096; //inches
+    public static final double DISTANCE_PER_PULSE = (6 * Math.PI) / 2048; //inches
 
     public static final double HIGH_GEAR_RATIO = 9.0/1.0;
     public static final double LOW_GEAR_RATIO = 19.6/1.0;
