@@ -142,7 +142,7 @@ public class Robot extends TimedRobot {
 //m_autonomousCommand =  shootAutoCommandGroup;
     // schedule the autonomous command (example)
 
-    m_autonomousCommand = new ForwardThenShootCommandGroup(robotContainer.shooterSubsystem, robotContainer.hopperSubsystem, robotContainer.neckSubsystem, robotContainer.drivetrainSubsystem, robotContainer.intakeSubsystem);
+    m_autonomousCommand = new ForwardThenShootCommandGroup(robotContainer.shooterSubsystem, robotContainer.hopperSubsystem, robotContainer.neckSubsystem, robotContainer.drivetrainSubsystem, robotContainer.intakeSubsystem, robotContainer.limelight);
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

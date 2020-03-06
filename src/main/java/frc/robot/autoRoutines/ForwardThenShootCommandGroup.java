@@ -6,14 +6,15 @@ import frc.robot.commands.drivetrain.DriveForDistanceCommand;
 import frc.robot.commands.intake.RetractIntakeCommand;
 import frc.robot.commands.shooting.StopSpinCommand;
 import frc.robot.subsystems.*;
+import frc.robot.utils.Limelight;
 
 public class ForwardThenShootCommandGroup extends SequentialCommandGroup {
-    public ForwardThenShootCommandGroup(ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem, NeckSubsystem neckSubsystem, DrivetrainSubsystem drivetrainSubsystem, IntakeSubsystem intakeSubsystem) {
+    public ForwardThenShootCommandGroup(ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem, NeckSubsystem neckSubsystem, DrivetrainSubsystem drivetrainSubsystem, IntakeSubsystem intakeSubsystem, Limelight limelight) {
         super();
         addCommands(
                 new RetractIntakeCommand(intakeSubsystem),
                 new DriveForDistanceCommand(drivetrainSubsystem, 72, .5,  .5 ),
-                new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, intakeSubsystem).withTimeout(5),
+                new ShootNoTurnCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, intakeSubsystem, drivetrainSubsystem, limelight).withTimeout(5),
                 new StopSpinCommand(shooterSubsystem)
         );
     }

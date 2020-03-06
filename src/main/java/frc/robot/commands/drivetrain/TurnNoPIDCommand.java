@@ -22,18 +22,19 @@ public class TurnNoPIDCommand extends CommandBase {
 
     @Override
     public void execute() {
+        System.out.println(limelight.getTx());
         if(limelight.getTx()<0){
-            drivetrainSubsystem.drive(-0.4,0.4);
+            drivetrainSubsystem.drive(-0.2,0.2);
             System.out.println("turning left");
         }else if(limelight.getTx()>0){
-            drivetrainSubsystem.drive(0.4,-0.4);
+            drivetrainSubsystem.drive(0.2,-0.2);
             System.out.println("turning right");
         }
     }
 
     @Override
     public boolean isFinished() {
-        return limelight.getTx() < .1 || limelight.getTx() > -.1;
+        return Math.abs(limelight.getTx()) < 3;
     }
 
     @Override
