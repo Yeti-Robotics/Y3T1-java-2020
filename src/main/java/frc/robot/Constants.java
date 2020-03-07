@@ -38,11 +38,11 @@ public final class Constants {
     public static final int HOPPER_LEFT_VICTOR = 5;
     public static final int HOPPER_RIGHT_VICTOR = 0;
 
-    public static final double ROLL_IN_SPEED = 0.75;
-    public static final double ROLL_OUT_SPEED = -0.75;
+    public static final double ROLL_IN_SPEED = 1.0;
+    public static final double ROLL_OUT_SPEED = -1.0;
 
-    public static final double FUNNEL_IN_SPEED = 0.5;
-    public static final double FUNNEL_OUT_SPEED = -0.5;
+    public static final double FUNNEL_IN_SPEED = 0.75;
+    public static final double FUNNEL_OUT_SPEED = -0.75;
 
     //neck constants
     public static final int NECK_BELT_TALON = 2;
@@ -51,7 +51,7 @@ public final class Constants {
     public static final int UPPER_BEAM_BREAK = 0;
     public static final int LOWER_BEAM_BREAK = 1;
 
-    public static final double NECK_UP_SPEED = 1;
+    public static final double NECK_UP_SPEED = 0.5;
     public static final double NECK_DOWN_SPEED = -0.5;
 
     //shooter constants
