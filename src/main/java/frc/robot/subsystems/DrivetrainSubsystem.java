@@ -23,8 +23,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
         leftFalcon1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
         rightFalcon1.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
 
-
-
         rightFalcon1.setInverted(true);
         rightFalcon2.setInverted(true);
 

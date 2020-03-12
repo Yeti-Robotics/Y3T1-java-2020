@@ -15,12 +15,16 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.autoRoutines.ForwardThenShootCommandGroup;
 
 import edu.wpi.first.wpilibj.command.Scheduler;
-
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.robot.autoRoutines.TurnThenForwardThenShootCommandGroup;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.IntakeSubsystem.IntakeStatus;
+import frc.robot.subsystems.ShooterSubsystem.ShooterStatus;
 import frc.robot.utils.Limelight;
 
 /**
@@ -42,14 +46,10 @@ public class Robot extends TimedRobot {
 
   private IntakeSubsystem intakeSubsystem;
 
-//  private DrivetrainSubsystem drivetrainSubsystem;
-//  private NeckSubsystem neckSubsystem;
-//  private ShooterSubsystem shooterSubsystem;
-//  private FunnelSubsystem hopperSubsystem;
-
   public static RobotContainer robotContainer;
-//  private ShootAutoCommandGroup shootAutoCommandGroup;
 
+  public static NetworkTable networkTable;
+  public static NetworkTable rootNetworkTable;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -65,17 +65,13 @@ public class Robot extends TimedRobot {
 
     
     robotContainer = new RobotContainer();
-//    drivetrainSubsystem = new DrivetrainSubsystem();
-//    intakeSubsystem = new IntakeSubsystem();
-//
-//    drivetrainSubsystem = new DrivetrainSubsystem();
-//    neckSubsystem = new NeckSubsystem();
-//    shooterSubsystem = new ShooterSubsystem();
-//    hopperSubsystem = new FunnelSubsystem();
-//
-//    shootAutoCommandGroup = new ShootAutoCommandGroup(shooterSubsystem, hopperSubsystem, neckSubsystem, drivetrainSubsystem);
-//    shootAutoCommandGroup = new ShootAutoCommandGroup(robotContainer.shooterS);
 
+    networkTable = NetworkTableInstance.getDefault().getTable("SmartDashboard");
+    rootNetworkTable = NetworkTableInstance.getDefault().getTable("");
+
+    UsbCamera driverCam = CameraServer.getInstance().startAutomaticCapture();
+    driverCam.setVideoMode(VideoMode.PixelFormat.kMJPEG, 200, 150, 30);
+    driverCam.setBrightness(50);
   }
 
   /**
@@ -121,7 +117,22 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("distance", Limelight.getDistance());
 
     SmartDashboard.putNumber("hor distance", Limelight.getHorDistance());
-  }
+
+    //Secondary Controls Shuffleboard
+    if(IntakeSubsystem.getIntakePosition() == IntakeStatus.DOWN) {
+      SmartDashboard.putString("Intake Status", "DOWN");
+    } else if(IntakeSubsystem.getIntakePosition() == IntakeStatus.UP) {
+      SmartDashboard.putString("Intake Status", "UP");
+    }
+
+    if(ShooterSubsystem.getShooterStatus() == ShooterStatus.BACKWARDS) {
+      SmartDashboard.putString("Flywheel Status", "REVERSE");
+    } else if(ShooterSubsystem.getShooterStatus() == ShooterStatus.FORWARD) {
+      SmartDashboard.putString("Flywheel Status", "FORWARD");
+    } else {
+      SmartDashboard.putString("Flywheel Status", "OFF");
+    }
+}
 
  
   /**
@@ -143,7 +154,7 @@ public class Robot extends TimedRobot {
 //m_autonomousCommand =  shootAutoCommandGroup;
     // schedule the autonomous command (example)
 
-    m_autonomousCommand = new TurnThenForwardThenShootCommandGroup(robotContainer.shooterSubsystem, robotContainer.hopperSubsystem, robotContainer.neckSubsystem, robotContainer.drivetrainSubsystem, robotContainer.intakeSubsystem, robotContainer.limelight);
+    m_autonomousCommand = new TurnThenForwardThenShootCommandGroup(robotContainer.shooterSubsystem, robotContainer.hopperSubsystem, robotContainer.neckSubsystem, robotContainer.drivetrainSubsystem, robotContainer.intakeSubsystem, robotContainer.limelight, robotContainer.shiftGearsSubsystem);
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
