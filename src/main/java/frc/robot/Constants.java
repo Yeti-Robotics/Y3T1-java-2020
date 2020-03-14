@@ -21,10 +21,12 @@ package frc.robot;
  */
 public final class Constants {
     //drive constants
-    public static final int LEFT_FALCON_1 = 14;
-    public static final int LEFT_FALCON_2 = 15;
-    public static final int RIGHT_FALCON_1 = 1;
-    public static final int RIGHT_FALCON_2 = 7;
+    public static final int LEFT_TALON = 14;
+    public static final int LEFT_VICTOR_1 = 15;
+    public static final int LEFT_VICTOR_2 = 1;
+    public static final int RIGHT_TALON = 7;
+    public static final int RIGHT_VICTOR_1 = 5;
+    public static final int RIGHT_VICTOR_2 = 6;
 
     public static final double kTurnP = 1;
     public static final double kTurnI = 0;
