@@ -39,10 +39,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
         rightVictor1.setNeutralMode(NeutralMode.Brake);
         rightVictor2.setNeutralMode(NeutralMode.Brake);
 
-        leftVictor1.set(VictorSPXControlMode.Follower, //LEFT_TALON ID);
-        leftVictor2.set(VictorSPXControlMode.Follower, //LEFT_TALON ID);
-        rightVictor1.set(VictorSPXControlMode.Follower, //RIGHT_TALON ID);
-        rightVictor2.set(VictorSPXControlMode.Follower, //RIGHT_TALON ID);
+//        leftVictor1.set(VictorSPXControlMode.Follower, //LEFT_TALON ID);
+//        leftVictor2.set(VictorSPXControlMode.Follower, //LEFT_TALON ID);
+//        rightVictor1.set(VictorSPXControlMode.Follower, //RIGHT_TALON ID);
+//        rightVictor2.set(VictorSPXControlMode.Follower, //RIGHT_TALON ID);
 
 
     }
@@ -97,12 +97,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
         NetworkTableEntry ty = table.getEntry("ty");
         NetworkTableEntry ta = table.getEntry("ta");
 
-//read values periodically
+        //read values periodically
         double x = tx.getDouble(0.0);
         double y = ty.getDouble(0.0);
         double area = ta.getDouble(0.0);
 
-//post to smart dashboard periodically
+        //post to smart dashboard periodically
         SmartDashboard.putNumber("LimelightX", x);
         SmartDashboard.putNumber("LimelightY", y);
         SmartDashboard.putNumber("LimelightArea", area);
