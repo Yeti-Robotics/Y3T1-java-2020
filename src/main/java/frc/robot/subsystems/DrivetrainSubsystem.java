@@ -39,12 +39,14 @@ public class DrivetrainSubsystem extends SubsystemBase {
         rightVictor1.setNeutralMode(NeutralMode.Brake);
         rightVictor2.setNeutralMode(NeutralMode.Brake);
 
-        leftVictor1.set(VictorSPXControlMode.Follower, //LEFT_TALON ID);
-        leftVictor2.set(VictorSPXControlMode.Follower, //LEFT_TALON ID);
-        rightVictor1.set(VictorSPXControlMode.Follower, //RIGHT_TALON ID);
-        rightVictor2.set(VictorSPXControlMode.Follower, //RIGHT_TALON ID);
-
-
+        rightTalon.setInverted(true);
+        rightVictor1.setInverted(true);
+        rightVictor2.setInverted(true);
+//        leftVictor1.set(VictorSPXControlMode.Follower, Constants.LEFT_VICTOR_1);
+//        leftVictor2.set(VictorSPXControlMode.Follower, Constants.LEFT_VICTOR_2);
+//        rightVictor1.set(VictorSPXControlMode.Follower, Constants.RIGHT_VICTOR_1);
+//        rightVictor2.set(VictorSPXControlMode.Follower, Constants.RIGHT_VICTOR_2);
+                
     }
 
     public void drive(double leftPower, double rightPower) {

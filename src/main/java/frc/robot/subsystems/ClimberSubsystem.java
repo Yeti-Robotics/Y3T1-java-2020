@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,8 +16,8 @@ public class ClimberSubsystem extends SubsystemBase {
     private DigitalInput bottomLimitSwitch;
 
     public ClimberSubsystem() {
-        climberTalon1 = new TalonSRX(Constants.CLIMBER_TALON_1);
-        climberTalon2 = new TalonSRX(Constants.CLIMBER_TALON_2);
+        climberTalon1 = new TalonSRX(Constants.LEFT_CLIMBER_TALON);
+        climberTalon2 = new TalonSRX(Constants.RIGHT_CLIMBER_TALON);
 
         climberTalon1.setInverted(true);
 

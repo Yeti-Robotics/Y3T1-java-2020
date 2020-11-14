@@ -124,10 +124,13 @@ public class RobotContainer {
     setJoystickButtonWhileHeld(driverStationJoy, 3, new ClimbDownCommand(climberSubsystem));
 
     //intake in
-    setJoystickButtonWhileHeld(driverStationJoy, 4, new IntakeInCommand(intakeSubsystem));
+//    setJoystickButtonWhileHeld(driverStationJoy, 4, new IntakeInCommand(intakeSubsystem));
+
+    setJoystickButtonWhenPressed(driverStationJoy, 4, new ExtendIntakeCommand(intakeSubsystem));
+    setJoystickButtonWhenPressed(driverStationJoy, 5, new RetractIntakeCommand(intakeSubsystem));
 
     //intake reverse
-    setJoystickButtonWhileHeld(driverStationJoy, 5, new IntakeOutCommand(intakeSubsystem));
+//    setJoystickButtonWhileHeld(driverStationJoy, 5, new IntakeOutCommand(intakeSubsystem));
 
     //Shift Gears
     setJoystickButtonWhenPressed(driverStationJoy, 11, new ToggleShiftingCommand(shiftGearsSubsystem));
