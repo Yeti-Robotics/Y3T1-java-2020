@@ -17,6 +17,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private TalonSRX leftTalon, rightTalon;
 
     private VictorSPX leftVictor1, leftVictor2, rightVictor1, rightVictor2;
+    
+    private Encoder leftEncoder, rightEncoder;
 
     public DrivetrainSubsystem() {
         
@@ -27,8 +29,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
         rightVictor1 = new VictorSPX(Constants.RIGHT_VICTOR_1);
         rightVictor2 = new VictorSPX(Constants.RIGHT_VICTOR_2);
 
-        leftTalon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
-        rightTalon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
+//         leftTalon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
+//         rightTalon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
+        
+        leftEncoder = new Encoder(0,1);
+        rightEncoder = new Encoder(2,3);
 
         // metalShavings = 42069;
 
@@ -68,11 +73,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public double getLeftEncoder() {
-        return (leftTalon.getSelectedSensorPosition() * Constants.DISTANCE_PER_PULSE) / (ShiftGearsSubsystem.getShifterPosition() == ShiftGearsSubsystem.ShiftStatus.HIGH ? Constants.HIGH_GEAR_RATIO : Constants.LOW_GEAR_RATIO);
+        return (leftEncoder.getRaw() * Constants.DISTANCE_PER_PULSE);
     }
 
     public double getRightEncoder() {
-        return (rightTalon.getSelectedSensorPosition() * Constants.DISTANCE_PER_PULSE) / (ShiftGearsSubsystem.getShifterPosition() == ShiftGearsSubsystem.ShiftStatus.HIGH ? Constants.HIGH_GEAR_RATIO : Constants.LOW_GEAR_RATIO);
+        return (rightEncoder.getRaw() * Constants.DISTANCE_PER_PULSE);
     }
 
     public double getAverageEncoder() {
@@ -80,8 +85,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public void resetEncoder() {
-        leftTalon.setSelectedSensorPosition(0);
-        rightTalon.setSelectedSensorPosition(0);
+        leftEncoder.reset();
+        rightEncoder.reset():
     }
 
     public void driveWithMinPower(double leftPower, double rightPower, double minAbsolutePower) {
