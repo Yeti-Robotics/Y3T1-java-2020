@@ -12,6 +12,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Encoder;
 
 public class DrivetrainSubsystem extends SubsystemBase {
     private TalonSRX leftTalon, rightTalon;
@@ -32,8 +33,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
 //         leftTalon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
 //         rightTalon.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,0,0);
         
-        leftEncoder = new Encoder(0,1);
-        rightEncoder = new Encoder(2,3);
+        leftEncoder = new Encoder(Constants.LEFT_ENCODER_A, Constants.LEFT_ENCODER_B);
+        rightEncoder = new Encoder(Constants.RIGHT_ENCODER_A, Constants.RIGHT_ENCODER_B);
 
         // metalShavings = 42069;
 
@@ -86,7 +87,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
     public void resetEncoder() {
         leftEncoder.reset();
-        rightEncoder.reset():
+        rightEncoder.reset();
     }
 
     public void driveWithMinPower(double leftPower, double rightPower, double minAbsolutePower) {
@@ -109,10 +110,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
         double y = ty.getDouble(0.0);
         double area = ta.getDouble(0.0);
 
-//post to smart dashboard periodically
-        SmartDashboard.putNumber("LimelightX", x);
-        SmartDashboard.putNumber("LimelightY", y);
-        SmartDashboard.putNumber("LimelightArea", area);
+        // post to smart dashboard periodically
+//        SmartDashboard.putNumber("LimelightX", x);
+//        SmartDashboard.putNumber("LimelightY", y);
+//        SmartDashboard.putNumber("LimelightArea", area);
+        System.out.println(getRightEncoder());
+        System.out.println(getLeftEncoder());
     }
 
 }
