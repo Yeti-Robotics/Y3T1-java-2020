@@ -33,7 +33,7 @@ public final class Constants {
     public static final double kTurnD = 0;
 
     public static final double DRIVE_ENCODER_RESOLUTION = 2048.0;
-    public static final double DRIVE_WHEEL_DIAMETER = 6.0;
+    public static final double DRIVE_WHEEL_DIAMETER = 5.6875; //inches
     public static final double DISTANCE_PER_PULSE = (DRIVE_WHEEL_DIAMETER * Math.PI) / DRIVE_ENCODER_RESOLUTION; //inches
 
     public static final int LEFT_ENCODER_A = 0;
@@ -68,8 +68,8 @@ public final class Constants {
     //shooter constants
     public static final int SHOOTER_LEFT_TALON = 11; //left
     public static final int SHOOTER_RIGHT_TALON = 4; //right
-    public static final int SHOOTER_SERVO_1 = 0;
-    public static final int SHOOTER_SERVO_2 = 1;
+    public static final int SHOOTER_SERVO_1 = 6;
+    public static final int SHOOTER_SERVO_2 = 7;
     public static final double SERVO_GEAR_RATIO = 32.0 / 96;
     public static final double SERVO_RATIO = 0.72;
 

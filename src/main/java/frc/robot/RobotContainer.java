@@ -17,6 +17,8 @@ import frc.robot.autoRoutines.ShootCommandGroup;
 import frc.robot.autoRoutines.ShootWithTurnCommandGroup;
 import frc.robot.commands.climbing.ClimbDownCommand;
 import frc.robot.commands.climbing.ClimbUpCommand;
+import frc.robot.commands.drivetrain.DriveForDistanceCommand;
+import frc.robot.commands.drivetrain.ResetEncodersCommand;
 import frc.robot.commands.drivetrain.StopDriveCommand;
 import frc.robot.commands.drivetrain.TurnNoPIDCommand;
 import frc.robot.commands.hopper.HopperOutCommand;
@@ -27,11 +29,7 @@ import frc.robot.commands.neck.StopNeckCommand;
 import frc.robot.commands.shifting.ToggleShiftingCommand;
 import frc.robot.commands.neck.MoveUpNeckCommand;
 import frc.robot.commands.hopper.HopperInCommand;
-import frc.robot.commands.shooting.SetHoodAngleCommand;
-import frc.robot.commands.shooting.SpinWithStopCommand;
-import frc.robot.commands.shooting.StartSpinCommand;
-import frc.robot.commands.shooting.StopSpinCommand;
-import frc.robot.commands.shooting.ToggleShooterCommand;
+import frc.robot.commands.shooting.*;
 import frc.robot.subsystems.*;
 import frc.robot.utils.Limelight;
 //import frc.robot.utils.DoubleButton;
@@ -127,7 +125,8 @@ public class RobotContainer {
 //    setJoystickButtonWhileHeld(driverStationJoy, 4, new IntakeInCommand(intakeSubsystem));
 
     setJoystickButtonWhenPressed(driverStationJoy, 4, new ExtendIntakeCommand(intakeSubsystem));
-    setJoystickButtonWhenPressed(driverStationJoy, 5, new RetractIntakeCommand(intakeSubsystem));
+    setJoystickButtonWhenPressed(driverStationJoy, 5, new TestServoCommand(shooterSubsystem, 0.95, .95));
+
 
     //intake reverse
 //    setJoystickButtonWhileHeld(driverStationJoy, 5, new IntakeOutCommand(intakeSubsystem));

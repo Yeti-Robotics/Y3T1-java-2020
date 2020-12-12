@@ -74,11 +74,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
     }
 
     public double getLeftEncoder() {
-        return (leftEncoder.getRaw() * Constants.DISTANCE_PER_PULSE);
+        return (leftEncoder.get() * Constants.DISTANCE_PER_PULSE);
     }
 
     public double getRightEncoder() {
-        return (rightEncoder.getRaw() * Constants.DISTANCE_PER_PULSE);
+        return (-rightEncoder.get() * Constants.DISTANCE_PER_PULSE);
     }
 
     public double getAverageEncoder() {
@@ -100,22 +100,26 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         // System.out.println("drivetrain periodic");
 
-        NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-        NetworkTableEntry tx = table.getEntry("tx");
-        NetworkTableEntry ty = table.getEntry("ty");
-        NetworkTableEntry ta = table.getEntry("ta");
+//        NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+//        NetworkTableEntry tx = table.getEntry("tx");
+//        NetworkTableEntry ty = table.getEntry("ty");
+//        NetworkTableEntry ta = table.getEntry("ta");
 
 //read values periodically
-        double x = tx.getDouble(0.0);
-        double y = ty.getDouble(0.0);
-        double area = ta.getDouble(0.0);
+//        double x = tx.getDouble(0.0);
+//        double y = ty.getDouble(0.0);
+//        double area = ta.getDouble(0.0);
 
         // post to smart dashboard periodically
 //        SmartDashboard.putNumber("LimelightX", x);
 //        SmartDashboard.putNumber("LimelightY", y);
 //        SmartDashboard.putNumber("LimelightArea", area);
-        System.out.println(getRightEncoder());
-        System.out.println(getLeftEncoder());
+
+
+//
+//        System.out.println("Right Encoder: " + getRightEncoder());
+//        System.out.println("Left Encoder: " + getLeftEncoder());
+//        System.out.println("Average Encoder: " + getAverageEncoder());
     }
 
 }

@@ -7,22 +7,26 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class TestServoCommand extends CommandBase {
     private final ShooterSubsystem shooterSubsystem;
     private double position;
+    private double sonic;
+    private int count;
 
-    public TestServoCommand(ShooterSubsystem shooterSubsystem, double pos) {
+    public TestServoCommand(ShooterSubsystem shooterSubsystem, double pos, double speed){
         this.shooterSubsystem = shooterSubsystem;
         addRequirements(shooterSubsystem);
-        position = pos;
+        this.position = pos;
+        this.sonic = speed;
     }
 
     @Override
     public void initialize() {
         System.out.println("Command Works");
+        count = 0;
     }
 
     @Override
     public void execute() {
-        shooterSubsystem.setServo(position);
-        System.out.println("position: " + shooterSubsystem.hoodServo1.getPosition() + " angle: " + shooterSubsystem.hoodServo1.getAngle() + "position variable: " + shooterSubsystem.getHoodPosition());
+        System.out.println("position: " + shooterSubsystem.hoodServo1.getPosition() + " angle: " + shooterSubsystem.hoodServo1.getAngle());
+
        
     }
 
