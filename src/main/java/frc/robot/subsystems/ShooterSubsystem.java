@@ -15,7 +15,7 @@ public class ShooterSubsystem extends SubsystemBase {
     private TalonSRX shooterLeftTalon;
     private TalonSRX shooterRightTalon;
     public Servo hoodServo1;
-    private Servo hoodServo2;
+    public Servo hoodServo2;
     private double distance;
     public enum ShooterStatus{
         FORWARD, BACKWARDS, OFF

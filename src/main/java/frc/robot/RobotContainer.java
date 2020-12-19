@@ -48,6 +48,7 @@ public class RobotContainer {
   // public final Joystick secondaryJoy;
   // private WheelOfFortuneSubsystem wheelOfFortuneSubsystem;
   public final Joystick driverStationJoy;
+  Joystick servoJoy;
   public DrivetrainSubsystem drivetrainSubsystem;
   public IntakeSubsystem intakeSubsystem;
   public NeckSubsystem neckSubsystem;
@@ -60,6 +61,7 @@ public class RobotContainer {
 
   public RobotContainer() {
     driverStationJoy = new Joystick(Constants.DRIVER_STATION_JOY);
+    servoJoy = new Joystick(1);
 
     drivetrainSubsystem = new DrivetrainSubsystem();
     intakeSubsystem = new IntakeSubsystem();
@@ -125,7 +127,7 @@ public class RobotContainer {
 //    setJoystickButtonWhileHeld(driverStationJoy, 4, new IntakeInCommand(intakeSubsystem));
 
     setJoystickButtonWhenPressed(driverStationJoy, 4, new ExtendIntakeCommand(intakeSubsystem));
-    setJoystickButtonWhenPressed(driverStationJoy, 5, new TestServoCommand(shooterSubsystem, 0.95, .95));
+    setJoystickButtonWhenPressed(driverStationJoy, 5, new TestServoCommand(shooterSubsystem));
 
 
     //intake reverse
@@ -137,6 +139,10 @@ public class RobotContainer {
     //Turn to target No PID
     setJoystickButtonWhenPressed(driverStationJoy, 12, new TurnNoPIDCommand(drivetrainSubsystem, limelight));
 
+  }
+
+  public double getServoThrottle() {
+    return servoJoy.getZ();
   }
 
   public double getLeftY() {

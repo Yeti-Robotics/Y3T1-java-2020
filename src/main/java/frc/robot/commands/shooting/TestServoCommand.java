@@ -1,6 +1,8 @@
 package frc.robot.commands.shooting;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.ShooterSubsystem;
 
 
@@ -10,35 +12,32 @@ public class TestServoCommand extends CommandBase {
     private double sonic;
     private int count;
 
-    public TestServoCommand(ShooterSubsystem shooterSubsystem, double pos, double speed){
+    public TestServoCommand(ShooterSubsystem shooterSubsystem){
         this.shooterSubsystem = shooterSubsystem;
         addRequirements(shooterSubsystem);
-        this.position = pos;
-        this.sonic = speed;
     }
 
     @Override
     public void initialize() {
-        System.out.println("Command Works");
-        count = 0;
+        System.out.println("Command started");
+
     }
 
     @Override
     public void execute() {
-        System.out.println("position: " + shooterSubsystem.hoodServo1.getPosition() + " angle: " + shooterSubsystem.hoodServo1.getAngle());
-
-       
+        System.out.println("current position: " + shooterSubsystem.hoodServo2.getPosition() + " & raw pwm: " + shooterSubsystem.hoodServo2.getRaw());
+        shooterSubsystem.hoodServo1.set(Robot.robotContainer.getServoThrottle());
+        shooterSubsystem.hoodServo2.set(-Robot.robotContainer.getServoThrottle());
     }
 
     @Override
     public boolean isFinished() {
-        // TODO: Make this return true when this Command no longer needs to run execute()
-        return Math.abs(shooterSubsystem.getHoodPosition() - position) == 0;
+        return false;
         
     }
 
     @Override
     public void end(boolean interrupted) {
-        System.out.println("Command End");
+        System.out.println("Command over");
     }
 }
