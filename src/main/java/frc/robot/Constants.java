@@ -78,6 +78,7 @@ public final class Constants {
     public static final double REVERSE_SHOOT_1_SPEED = -0.5;
     public static final double REVERSE_SHOOT_2_SPEED = -0.5;
 
+    public static final int HOOD_TALON = 14;
     //climber constants
     public static final int LEFT_CLIMBER_TALON = 9; //left
     public static final int RIGHT_CLIMBER_TALON = 3; //right

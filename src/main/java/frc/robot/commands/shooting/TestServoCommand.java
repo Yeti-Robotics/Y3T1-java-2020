@@ -25,9 +25,9 @@ public class TestServoCommand extends CommandBase {
 
     @Override
     public void execute() {
-        System.out.println("current position: " + shooterSubsystem.hoodServo2.getPosition() + " & raw pwm: " + shooterSubsystem.hoodServo2.getRaw());
-        shooterSubsystem.hoodServo1.set(Robot.robotContainer.getServoThrottle());
-        shooterSubsystem.hoodServo2.set(-Robot.robotContainer.getServoThrottle());
+//        System.out.println("current position: " + shooterSubsystem.hoodServo2.getPosition() + " & raw pwm: " + shooterSubsystem.hoodServo2.getRaw());
+//        shooterSubsystem.hoodServo1.set(Robot.robotContainer.getServoThrottle());
+//        shooterSubsystem.hoodServo2.set(-Robot.robotContainer.getServoThrottle());
     }
 
     @Override

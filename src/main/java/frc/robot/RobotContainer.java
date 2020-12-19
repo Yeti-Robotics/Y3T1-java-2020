@@ -118,13 +118,17 @@ public class RobotContainer {
     ));
     
     //Climber Up
-    setJoystickButtonWhileHeld(driverStationJoy, 2, new ClimbUpCommand(climberSubsystem));
+//    setJoystickButtonWhileHeld(driverStationJoy, 2, new ClimbUpCommand(climberSubsystem));
 
     //Climbs Down
-    setJoystickButtonWhileHeld(driverStationJoy, 3, new ClimbDownCommand(climberSubsystem));
+//    setJoystickButtonWhileHeld(driverStationJoy, 3, new ClimbDownCommand(climberSubsystem));
 
     //intake in
 //    setJoystickButtonWhileHeld(driverStationJoy, 4, new IntakeInCommand(intakeSubsystem));
+
+    setJoystickButtonWhileHeld(driverStationJoy, 2, new TestHoodMotorCommand(shooterSubsystem, 0.05));
+    setJoystickButtonWhileHeld(driverStationJoy, 3, new TestHoodMotorCommand(shooterSubsystem, -0.05));
+
 
     setJoystickButtonWhenPressed(driverStationJoy, 4, new ExtendIntakeCommand(intakeSubsystem));
     setJoystickButtonWhenPressed(driverStationJoy, 5, new TestServoCommand(shooterSubsystem));
